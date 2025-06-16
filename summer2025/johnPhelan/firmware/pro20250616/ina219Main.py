@@ -1,10 +1,7 @@
-from ina219Driver import INA219
+from ina219Driver import INA219DRIVER
 import time
 
-SHUNT_OHMS = 0.1
-MAX_EXPECTED_AMPS = 0.2
-
-ina = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, address=0x40, busnum=5)
+ina = INA219DRIVER(busnum=5, address=0x40)
 
 while True:
     ina.read()

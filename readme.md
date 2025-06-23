@@ -13,7 +13,7 @@ lakithaWijeratne
 ├── firmware  
 │   ├── mintsLib  
 │   │   ├── mintsDefinitions.yaml  
-│   │   └── commonFirmware.yaml  
+│   │   └── commonFirmware.py 
 │   └── pro20250528  
 │       ├── readme.md  
 │       ├── ips7100Reader.py  
@@ -35,11 +35,26 @@ lakithaWijeratne
     └── olderFirmware.py  
 ```
 
-> **Note:**  
-> - `firmware/mintsLib` contains shared definitions and firmware logic.  
-> - `firmware/proYYYYMMDD` contains project-specific readers and documentation.  
-> - `mintsData/YYYY/MM/DD` stores sensor data in timestamped folders.  
-> - `res/` contains diagrams and other resources.  
-> - `legacy/` contains older or deprecated firmware.
+---
+
+## 📝 Folder Descriptions
+
+- **`firmware/mintsLib/`**  
+  Contains shared firmware resources such as common definitions and YAML configuration files.
+
+- **`firmware/proYYYYMMDD/`**  
+  Project-specific code including sensor reader scripts and documentation.
+
+- **`mintsData/YYYY/MM/DD/`**  
+  Daily sensor data logs stored in a structured date hierarchy.
+
+- **`res/proYYYYMMDD/`**  
+  Visual documentation such as connection diagrams for each project.
+
+- **`legacy/`**  
+  Archive for outdated or experimental firmware code.
 
 ---
+
+> ✅ **Reminder:**  
+> Ensure your code is well-documented, filenames are descriptive, and updates are committed to GitHub regularly following MINTS conventions.

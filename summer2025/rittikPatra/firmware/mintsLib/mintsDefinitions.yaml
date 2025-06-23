@@ -1,0 +1,50 @@
+# mintsDefinitions.yaml
+# Definitions and configuration for mintsLib
+
+IPS7100:
+  description: "Piera IPS7100"
+  protocol: "I2C"
+  address: "0x4B"  
+  voltage_range: "4.5V to 5.5V"
+  power_draw: "110 mA (measurement mode)" #10mA in Sleep mode
+  measurements:
+    Particle Count:
+      unit: 
+        PM₀.₁, PM₀.₃, PM₀.₅, PM₁, PM₂.₅:
+          Range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            resolution: "1 #/L"
+          Range (>200 particles/m³):
+            accuracy: "±10 particles/m³"
+            resolution: "1 #/L"
+        PM₀.₁, PM₀.₃, PM₀.₅, PM₁, PM₂.₅:
+          Range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            resolution: "1 #/L"
+          Range (>200 particles/m³):
+            accuracy: "±10 particles/m³"
+            resolution: "1 #/L"
+          unit: "µg/m³"
+          description: "Concentration of particulate matter in air"
+          accuracy: "±10% of reading"
+          range: "0 to 1000 µg/m³"
+          resolution: "1 µg/m³"
+          sampling_rate: "1 Hz"
+        Range 0-200"#/cm³"
+      description: "Count of particles per liter"
+      resolution: "1 #/L"
+      accuracy: "1"
+      range: "-40 to 85°C"
+      sampling_rate: "1 Hz"
+    humidity:
+      unit: "%"
+      description: "Relative humidity"
+      accuracy: "±3% RH"
+      range: "0 to 100% RH"
+      sampling_rate: "1 Hz"
+    pressure:
+      unit: "mbar"
+      description: "Atmospheric pressure"
+      accuracy: "±1 hPa"
+      range: "300 to 1100 hPa"
+      sampling_rate: "1 Hz"

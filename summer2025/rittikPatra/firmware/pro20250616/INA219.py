@@ -64,7 +64,7 @@ date= datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 class write_to_csv:
 
     #check for existing folder structure
-    def checkFolder()
+    def checkFolder():
         year = datetime.datetime.now().strftime('%Y')
         month = datetime.datetime.now().strftime('%m')
         day = datetime.datetime.now().strftime('%d')

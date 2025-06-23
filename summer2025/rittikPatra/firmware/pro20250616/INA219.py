@@ -17,7 +17,7 @@ class FirstINA219:
             print("  Shunt Voltage: %.3f mV" % self.ina.shunt_voltage())
             print("  Bus Current: %.3f mA" % self.ina.current())
         except DeviceRangeError as e:
-            print("  Error:", e)
+            print("  Error:", e)            
 
         # Optional: print raw register data
         self.read_raw_registers()

@@ -61,7 +61,6 @@ IPS7100:
           range (>1000 particles/cm³):
             accuracy: "±10 % Average"      
       resolution: "1 #/cm³"
-      sampling_rate: "1 Hz"
     
     particle mass concentration:
       unit: "µg/m³"
@@ -116,4 +115,6 @@ IPS7100:
           range (>50 µg/m³):
             accuracy: "±20 % Average"      
       resolution: "0.1 µg/m³"
-      sampling_rate: "1 Hz"
+  sampling_rate: "1 Hz" #5 hz in Debug mode
+  
+

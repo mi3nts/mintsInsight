@@ -1,10 +1,19 @@
-# MASK (Mints Automobile Sensing Kit)
+# MASK – Mints Automobile Sensing Kit
 
-The MASK is a compact sensing system designed for installation on a vehicle’s rear license plate. It collects real-time data on particulate matter (PM), carbon dioxide (CO₂) levels, temperature, humidity, and atmospheric pressure.
+The **MASK** is a compact, vehicle-mounted sensing system designed to be installed on the rear license plate. It enables real-time environmental monitoring by collecting data on:
 
-![MASK](res/mask.png)
+- Particulate Matter (PM)  
+- Carbon Dioxide (CO₂)  
+- Temperature  
+- Humidity  
+- Atmospheric Pressure
 
+![MASK Device](res/mask.png)
 
+---
 
-The wiring diagram of the project is given below 
-![MASK](res/MASK.drawio.png)
+## Wiring Diagram
+
+The wiring layout for the MASK system is illustrated below:
+
+![MASK Wiring Diagram](res/MASK.drawio.png)

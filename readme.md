@@ -94,6 +94,37 @@ lakithaWijeratne
     └── olderFirmware.py  
 ```
 
+# 🔌 Wiring Diagram Color Codes
+
+## Primary Wire Colors
+
+| Signal             | Color Icon                        | Hex Code   | Label |
+|--------------------|-----------------------------------|------------|-------|
+| Power              | ![](./icons/F97171.png)           | `#F97171`  | Red   |
+| Ground             | ![](./icons/000000.png)           | `#000000`  | Black |
+| I²C SCL            | ![](./icons/FBEC5D.png)           | `#FBEC5D`  | Yellow|
+| I²C SDA            | ![](./icons/C0C0C0.png)           | `#C0C0C0`  | Grey  |
+| RX (w.r.t Master)  | ![](./icons/3CD184.png)           | `#3CD184`  | Green |
+| TX (w.r.t Master)  | ![](./icons/1E81B0.png)           | `#1E81B0`  | Blue  |
+
+---
+
+## 🎨 Additional Color Options
+
+| Color Icon                        | Hex Code   | Label  |
+|-----------------------------------|------------|--------|
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/66BEB2.png)           | `#66BEB2`  | Teal   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/99192.png)           | `#F99192`  | Pink   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/8AD6CC.png)           | `#8AD6CC`  | Aqua   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/3D6647.png)           | `#3D6647`  | Forest |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/000080.png)           | `#000080`  | Navy   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/FBA85B.png)           | `#FBA85B`  | Orange |
+
+Fonts to use [Montserrat](https://github.com/mi3nts/instructables/tree/master/mintsThemes/Montserrat%2CSankofa_Display/Montserrat) and [Sankofa_Display](https://github.com/mi3nts/instructables/tree/master/mintsThemes/Montserrat%2CSankofa_Display/Sankofa_Display). 
+
+Logos to use https://github.com/mi3nts/instructables/tree/master/mintsThemes/logos
+
+
 ---
 
 ## 📝 Folder Descriptions

@@ -113,12 +113,12 @@ lakithaWijeratne
 
 | Color Icon                        | Hex Code   | Label  |
 |-----------------------------------|------------|--------|
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/66BEB2.png)           | `#66BEB2`  | Teal   |
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/99192.png)           | `#F99192`  | Pink   |
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/8AD6CC.png)           | `#8AD6CC`  | Aqua   |
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/3D6647.png)           | `#3D6647`  | Forest |
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/000080.png)           | `#000080`  | Navy   |
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/FBA85B.png)           | `#FBA85B`  | Orange |
+| ![](https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/66BEB2.png?raw=true)           | `#66BEB2`  | Teal   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/99192.png?raw=true)            | `#F99192`  | Pink   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/8AD6CC.png?raw=true)           | `#8AD6CC`  | Aqua   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/3D6647.png?raw=true)           | `#3D6647`  | Forest |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/000080.png?raw=true)           | `#000080`  | Navy   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/FBA85B.png?raw=true)           | `#FBA85B`  | Orange |
 
 Fonts to use [Montserrat](https://github.com/mi3nts/instructables/tree/master/mintsThemes/Montserrat%2CSankofa_Display/Montserrat) and [Sankofa_Display](https://github.com/mi3nts/instructables/tree/master/mintsThemes/Montserrat%2CSankofa_Display/Sankofa_Display). 
 

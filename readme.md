@@ -94,6 +94,27 @@ lakithaWijeratne
     └── olderFirmware.py  
 ```
 
+---
+
+## 📝 Folder Descriptions
+
+- **`firmware/mintsLib/`**  
+  Contains shared firmware resources such as common definitions and YAML configuration files.
+
+- **`firmware/proYYYYMMDD/`**  
+  Project-specific code including sensor reader scripts and documentation.
+
+- **`mintsData/YYYY/MM/DD/`**  
+  Daily sensor data logs stored in a structured date hierarchy.
+
+- **`res/proYYYYMMDD/`**  
+  Visual documentation such as connection diagrams for each project.
+
+- **`legacy/`**  
+  Archive for outdated or experimental firmware code.
+
+---
+
 # 🔌 Wiring Diagram Color Codes
 
 ## Primary Wire Colors
@@ -131,25 +152,7 @@ lakithaWijeratne
 
 - [MINTS Logos](https://github.com/mi3nts/instructables/tree/master/mintsThemes/logos)
 
-
----
-
-## 📝 Folder Descriptions
-
-- **`firmware/mintsLib/`**  
-  Contains shared firmware resources such as common definitions and YAML configuration files.
-
-- **`firmware/proYYYYMMDD/`**  
-  Project-specific code including sensor reader scripts and documentation.
-
-- **`mintsData/YYYY/MM/DD/`**  
-  Daily sensor data logs stored in a structured date hierarchy.
-
-- **`res/proYYYYMMDD/`**  
-  Visual documentation such as connection diagrams for each project.
-
-- **`legacy/`**  
-  Archive for outdated or experimental firmware code.
+You can find more information in the mintsThemes GitHub repository.
 
 ---
 

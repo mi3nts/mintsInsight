@@ -7,4 +7,4 @@ The MASK is a compact sensing system designed for installation on a vehicle’s 
 
 
 The wiring diagram of the project is given below 
-![MASK](res/wiringDiagram.png)
+![MASK](res/MASK.drawio.png)

@@ -9,6 +9,8 @@ IPS7100:
   power_draw: "110 mA (measurement mode)" #10mA in Sleep mode
   measurements:
     particle Count:
+      unit: "particles/cm³"
+      description: "Count of particles per cm³"
       accuracy:
         pc0_1::
           range (0-200 particles/cm³):
@@ -57,10 +59,8 @@ IPS7100:
             accuracy: "±100 particles/cm³"
             
           range (>1000 particles/cm³):
-            accuracy: "±10 % Average"
-      unit: "particles/cm³"      
+            accuracy: "±10 % Average"      
       resolution: "1 #/cm³"
-      description: "Count of particles per cm³"
       sampling_rate: "1 Hz"
     
     particle mass concentration:
@@ -114,8 +114,6 @@ IPS7100:
             accuracy: "±10 µg/m³"
             
           range (>50 µg/m³):
-            accuracy: "±20 % Average"
-      unit: "particles/cm³"      
-      resolution: "1 #/cm³"
-      description: "Count of particles per cm³"
+            accuracy: "±20 % Average"      
+      resolution: "0.1 µg/m³"
       sampling_rate: "1 Hz"

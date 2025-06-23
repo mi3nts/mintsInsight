@@ -58,20 +58,29 @@ class SecondINA219:
             swapped = ((value << 8) & 0xFF00) | (value >> 8)
             print(f"    Reg 0x{reg:02X}: 0x{swapped:04X}")
 
-#writing to a csv
-date= datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-class write_to_csv:
+year = datetime.datetime.now().strftime('%Y')
+month = datetime.datetime.now().strftime('%m')
+day = datetime.datetime.now().strftime('%d')
+folderPath = f"summer2025/rittikPatra/mintsData/{year}/{month}/{day}"
+csvName = f"{folderPath}/mints_INA219_{year}_{month}_{day}.csv"
+# create a csv file with the current date in the name"
 
-    #check for existing folder structure
-    def checkFolder():
-        year = datetime.datetime.now().strftime('%Y')
-        month = datetime.datetime.now().strftime('%m')
-        day = datetime.datetime.now().strftime('%d')
-        folderPath = f"~/mintsData/{year}/{month}/{day}"
+#check for existing folder structure
+def checkFolder(): 
+    if not os.path.exists(folderPath):
+    os.makedirs(folderPath)
+def checkCSV():
+    if not os.path.exists(csvName):
+        with open(csvName, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Timestamp', 'Sensor', 'Bus Voltage (V)', 'Power (mW)', 'Shunt Voltage (mV)', 'Bus Current (mA)'])
+        
 
 
-def write_to_csv(sensor1_data, sensor2_data, filename='sensor_data.csv'):
+def write_to_csv(sensor1_data, sensor2_data, filename= csvName):
+    # Ensure the csv file exists
+
     with open(filename, mode='a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Sensor', 'Bus Voltage (V)', 'Power (mW)', 'Shunt Voltage (mV)', 'Bus Current (mA)'])

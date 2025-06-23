@@ -69,7 +69,8 @@ csvName = f"{folderPath}/mints_INA219_{year}_{month}_{day}.csv"
 #check for existing folder structure
 def checkFolder(): 
     if not os.path.exists(folderPath):
-    os.makedirs(folderPath)
+        os.makedirs(folderPath)
+
 def checkCSV():
     if not os.path.exists(csvName):
         with open(csvName, mode='w', newline='') as file:

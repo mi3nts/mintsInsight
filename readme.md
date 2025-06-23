@@ -60,7 +60,7 @@ lakithaWijeratne
 │       ├── ds01INA210.pdf
 │       └── ds02INA210.pdf
 │
-├── sensorDefinitions
+├── sensorDefinitionsMaster
 │   ├── bme280.yaml
 │   └── ina219.yaml
 │   
@@ -71,7 +71,12 @@ lakithaWijeratne
 │   └── pro20250528  
 │       ├── readme.md  
 │       ├── ips7100Reader.py  
-│       └── ina219Reader.py  
+│       ├── ina219Reader.py
+│       │  
+│       └── sensorDefinitions
+│           ├── bme280.yaml
+│           └── ina219.yaml
+│          
 │  
 ├── mintsData  
 │   └── 2025  

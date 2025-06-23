@@ -115,5 +115,46 @@ lakithaWijeratne
 
 ---
 
+# 🔌 Wiring Diagram Color Codes
+
+## Primary Wire Colors
+
+| Signal             | Color Icon                                                                                     | Hex Code   | Label |
+|--------------------|:----------------------------------------------------------------------------------------------:|------------|-------|
+| Power              | <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/F97171.png?raw=true" width="20"/></div> | `#F97171`  | Red   |
+| Ground             | <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/000000.png?raw=true" width="20"/></div> | `#000000`  | Black |
+| I²C SCL            | <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/FBEC5D.png?raw=true" width="20"/></div> | `#FBEC5D`  | Yellow|
+| I²C SDA            | <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/C0C0C0.png?raw=true" width="20"/></div> | `#C0C0C0`  | Grey  |
+| RX (w.r.t Master)  | <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/3CD184.png?raw=true" width="20"/></div> | `#3CD184`  | Green |
+| TX (w.r.t Master)  | <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/1E81B0.png?raw=true" width="20"/></div> | `#1E81B0`  | Blue  |
+
+---
+
+## 🎨 Additional Color Options
+
+| Color Icon                                                                                     | Hex Code   | Label  |
+|:----------------------------------------------------------------------------------------------:|------------|--------|
+| <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/66BEB2.png?raw=true" width="20"/></div> | `#66BEB2`  | Teal   |
+| <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/F99192.png?raw=true" width="20"/></div> | `#F99192`  | Pink   |
+| <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/8AD6CC.png?raw=true" width="20"/></div> | `#8AD6CC`  | Aqua   |
+| <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/3D6647.png?raw=true" width="20"/></div> | `#3D6647`  | Forest |
+| <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/000080.png?raw=true" width="20"/></div> | `#000080`  | Navy   |
+| <div align="center"><img src="https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/FBA85B.png?raw=true" width="20"/></div> | `#FBA85B`  | Orange |
+
+---
+
+### Fonts
+
+- [Montserrat](https://github.com/mi3nts/instructables/tree/master/mintsThemes/Montserrat%2CSankofa_Display/Montserrat)
+- [Sankofa_Display](https://github.com/mi3nts/instructables/tree/master/mintsThemes/Montserrat%2CSankofa_Display/Sankofa_Display)
+
+### Logos
+
+- [MINTS Logos](https://github.com/mi3nts/instructables/tree/master/mintsThemes/logos)
+
+You can find more information in the mintsThemes GitHub repository.
+
+---
+
 > ✅ **Reminder:**  
 > Ensure your code is well-documented, filenames are descriptive, and updates are committed to GitHub regularly following MINTS conventions.

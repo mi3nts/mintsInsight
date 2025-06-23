@@ -4,12 +4,37 @@
 
 ---
 
+## MINTS Project Checklist 
+- Download All Relavant Data Sheets
+- Note down power and data communication requirments
+- Note down the each sensor measurments and note it on a yaml file 
+    - Eg: BME280
+            - temperature (C)
+            - humidity (%)
+            - pressure (mbar)
+            - dewPoint (C)
+-            
+  
+
+
 ## MINTS Project Requirements
 
 Each project assigned should follow the folder structure below:
 
 ```
 lakithaWijeratne  
+├── datasheets 
+│   ├── BME280
+│   │   ├── ds01BME280.pdf
+│   │   └── ds02BME280.pdf
+│   └── INA219
+│       ├── ds01INA210.pdf
+│       └── ds02INA210.pdf
+│
+├── sensorDefinitions
+│   ├── bme280.yaml
+│   └── ina219.yaml
+│   
 ├── firmware  
 │   ├── mintsLib  
 │   │   ├── mintsDefinitions.yaml  
@@ -33,6 +58,25 @@ lakithaWijeratne
 │  
 └── legacy  
     └── olderFirmware.py  
+```
+
+For the sensor descritions the yaml file should follow this format 
+``` yaml 
+BME280:
+  description: "Bosch BME280 Environmental Sensor"
+  protocol: "I2C"
+  address: "0x76"  # or "0x77", depending on the board wiring
+  measurements:
+    temperature:
+      unit: "°C"
+      description: "Ambient temperature"
+    humidity:
+      unit: "%"
+      description: "Relative humidity"
+    pressure:
+      unit: "mbar"
+      description: "Barometric pressure"
+
 ```
 
 ---

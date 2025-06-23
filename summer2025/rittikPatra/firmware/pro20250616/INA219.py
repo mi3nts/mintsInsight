@@ -1,6 +1,9 @@
 from ina219 import INA219, DeviceRangeError
 from smbus2 import SMBus
 import time
+import csv
+import datetime
+import os
 
 class FirstINA219:
     def __init__(self, address=0x40, bus_num=5):
@@ -55,8 +58,29 @@ class SecondINA219:
             swapped = ((value << 8) & 0xFF00) | (value >> 8)
             print(f"    Reg 0x{reg:02X}: 0x{swapped:04X}")
 
+#writing to a csv
+date= datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+class write_to_csv:
+
+    #check for existing folder structure
+    def checkFolder()
+        year = datetime.datetime.now().strftime('%Y')
+        month = datetime.datetime.now().strftime('%m')
+        day = datetime.datetime.now().strftime('%d')
+        folderPath = f"~/mintsData/{year}/{month}/{day}"
+
+
+def write_to_csv(sensor1_data, sensor2_data, filename='sensor_data.csv'):
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Sensor', 'Bus Voltage (V)', 'Power (mW)', 'Shunt Voltage (mV)', 'Bus Current (mA)'])
+        writer.writerow(['Sensor 1'] + sensor1_data)
+        writer.writerow(['Sensor 2'] + sensor2_data)
+
 
 # Continuous loop
+
 if __name__ == "__main__":
     sensor1 = FirstINA219()
     sensor2 = SecondINA219()
@@ -69,3 +93,12 @@ if __name__ == "__main__":
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nExiting loop.")
+
+#writing to a csv
+
+def write_to_csv(sensor1_data, sensor2_data, filename='sensor_data.csv'):
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Sensor', 'Bus Voltage (V)', 'Power (mW)', 'Shunt Voltage (mV)', 'Bus Current (mA)'])
+        writer.writerow(['Sensor 1'] + sensor1_data)
+        writer.writerow(['Sensor 2'] + sensor2_data)

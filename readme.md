@@ -1,25 +1,54 @@
-
 # Mints Insight  
 **INSIGHT** – *IoT Networked Sensing Instructional Guide for Hands-on Training*
 
 ---
 
 ## MINTS Project Checklist 
-- Download All Relavant Data Sheets
-- Note down power and data communication requirments
-- Note down the each sensor measurments and note it on a yaml file 
-    - Eg: BME280
-            - temperature (C)
-            - humidity (%)
-            - pressure (mbar)
-            - dewPoint (C)
--            
-  
+- Download all relevant datasheets.
+- Note down power and data communication requirements.
+- Record sensor measurements and document them in a YAML file.
+    Sensor descriptions in the YAML file (e.g., `bme280.yaml`) should follow the format shown below:
+    ```yaml
+    BME280:
+      description: "Adafruit BME280 Environmental Sensor Breakout"
+      protocol: "I2C"
+      address: "0x76"  # Default; 0x77 if SDO is tied to VCC
+      voltage_range: "3.3V to 5V (regulated onboard)"
+      power_draw: "0.6 mA (typical in normal mode)"
+      measurements:
+        temperature:
+          unit: "°C"
+          description: "Ambient temperature"
+          accuracy: "±1.0°C"
+          range: "-40 to 85°C"
+          sampling_rate: "1 Hz"
+        humidity:
+          unit: "%"
+          description: "Relative humidity"
+          accuracy: "±3% RH"
+          range: "0 to 100% RH"
+          sampling_rate: "1 Hz"
+        pressure:
+          unit: "mbar"
+          description: "Atmospheric pressure"
+          accuracy: "±1 hPa"
+          range: "300 to 1100 hPa"
+          sampling_rate: "1 Hz"
+    ```
 
+- Define `mintsDefinitions.yaml` for project-specific definitions.
+    ```yaml
+    dataFolder: "/home/teamlary/mintsData"
+    ```
+
+- Create a wiring diagram for the project.
+- Create a README for the project: [Sample Readme](https://github.com/mi3nts/mintsInsight/blob/main/exampleProjectReadme.md)
+- Develop and test your firmware.
+- Verify data is being correctly logged in the `mintsData` folder.
 
 ## MINTS Project Requirements
 
-Each project assigned should follow the folder structure below:
+Each project should follow the folder structure below:
 
 ```
 lakithaWijeratne  
@@ -58,25 +87,6 @@ lakithaWijeratne
 │  
 └── legacy  
     └── olderFirmware.py  
-```
-
-For the sensor descritions the yaml file should follow this format 
-``` yaml 
-BME280:
-  description: "Bosch BME280 Environmental Sensor"
-  protocol: "I2C"
-  address: "0x76"  # or "0x77", depending on the board wiring
-  measurements:
-    temperature:
-      unit: "°C"
-      description: "Ambient temperature"
-    humidity:
-      unit: "%"
-      description: "Relative humidity"
-    pressure:
-      unit: "mbar"
-      description: "Barometric pressure"
-
 ```
 
 ---

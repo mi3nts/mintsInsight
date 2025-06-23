@@ -114,7 +114,7 @@ lakithaWijeratne
 | Color Icon                        | Hex Code   | Label  |
 |-----------------------------------|------------|--------|
 | ![](https://github.com/mi3nts/instructables/blob/master/mintsThemes/icons/66BEB2.png?raw=true)           | `#66BEB2`  | Teal   |
-| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/99192.png?raw=true)            | `#F99192`  | Pink   |
+| ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/F99192.png?raw=true)           | `#F99192`  | Pink   |
 | ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/8AD6CC.png?raw=true)           | `#8AD6CC`  | Aqua   |
 | ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/3D6647.png?raw=true)           | `#3D6647`  | Forest |
 | ![](https://github.com/mi3nts/instructables/tree/master/mintsThemes/icons/000080.png?raw=true)           | `#000080`  | Navy   |

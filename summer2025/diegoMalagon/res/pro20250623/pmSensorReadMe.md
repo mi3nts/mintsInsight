@@ -5,7 +5,7 @@ this circuit design utilizes a raspberry pi microcontroller in order to comminuc
 * Rain
 * Particulate Matter (PM)
 
-# ![Wiring Diagram][def]
+## ![Wiring Diagram for PM and CO2 sensors][def]
 
 
 

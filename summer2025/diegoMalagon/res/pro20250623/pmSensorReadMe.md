@@ -5,8 +5,8 @@ this circuit design utilizes a raspberry pi microcontroller in order to comminuc
 * Rain
 * Particulate Matter (PM)
 
-# Wiring Diagram
+# ![Wiring Diagram][def]
 
-[wiring diagram][def]
+
 
 [def]: summer2025/diegoMalagon/res/pro20250623/INA219connectionDiagram.drawio.png

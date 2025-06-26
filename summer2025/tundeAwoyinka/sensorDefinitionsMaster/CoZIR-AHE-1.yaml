@@ -1,0 +1,20 @@
+Co2 Sensor -- CoZII-AHE-1:
+  description: "The CozIR®-AHE is a low power NDIR CO2 sensor using state-of-the-art solid-state LED optical technology"
+  protocol: "UART control and data interface"
+  address: "not applicable"  # UART, on the other hand, does not use addressing in the same wa
+  voltage_range: "3.25V to 5.5V (regulated onboard)"
+  power_draw: "0.01 - 1 mA (sleep mode - normal mode)"
+  measurements:
+    temperature:
+      unit: "°C"
+      description: "Ambient temperature"
+      accuracy: "±5.0°C"
+      range: "-25 to 55°C"
+      Response time: ">10 sec"
+    humidity:
+      unit: "%"
+      description: "Relative humidity"
+      accuracy: "±3% RH"
+      range: "0 to 100% RH"
+      Response time: "<8 sec"
+    "

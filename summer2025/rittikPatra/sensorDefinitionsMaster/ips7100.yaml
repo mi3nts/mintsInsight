@@ -1,0 +1,118 @@
+# mintsDefinitions.yaml
+# Definitions and configuration for mintsLib
+
+IPS7100:
+  description: "Piera IPS7100"
+  protocol: "I2C"
+  address: "0x4B"  
+  voltage_range: "4.5V to 5.5V"
+  power_draw: "110 mA (measurement mode)" #10mA in Sleep mode
+  measurements:
+    particle Count:
+      unit: "particles/cm³"
+      description: "Count of particles per cm³"
+      accuracy:
+        pc0_1::
+          range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            
+          range (>200 particles/cm³):
+            accuracy: "±10 % Average"
+          
+        pc0_3:
+          range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            
+          range (>200 particles/cm³):
+            accuracy: "±10 % Average"
+            
+        pc0_5::
+          range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            
+          range (>200 particles/cm³):
+            accuracy: "±10 % Average"
+            
+        pc1_0:
+          range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            
+          range (>200 particles/cm³):
+            accuracy: "±10 % Average"
+            
+        pc2_5::
+          range (0-200 particles/cm³):
+            accuracy: "±20 particles/cm³"
+            
+          range (>200 particles/cm³):
+            accuracy: "±10 % Average"
+            
+        pc5_0:
+          range (0-1000 particles/cm³):
+            accuracy: "±100 particles/cm³"
+            
+          range (>1000 particles/cm³):
+            accuracy: "±10 % Average"
+            
+        pc10_0::
+          range (0-1000 particles/cm³):
+            accuracy: "±100 particles/cm³"
+            
+          range (>1000 particles/cm³):
+            accuracy: "±10 % Average"      
+      resolution: "1 #/cm³"
+    
+    particle mass concentration:
+      unit: "µg/m³"
+      description: "Mass concentration of particles"
+      accuracy:
+        pm0_1::
+          range (0-50 µg/m³):
+            accuracy: "±5 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±10 % Average"
+          
+        pm0_3:
+          range (0-50 µg/m³):
+            accuracy: "±5 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±10 % Average"
+            
+        pm0_5::
+          range (0-50 µg/m³):
+            accuracy: "±5 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±10 % Average"
+            
+        pm1_0:
+          range (0-50 µg/m³):
+            accuracy: "±5 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±10 % Average"
+            
+        pm2_5::
+          range (0-50 µg/m³):
+            accuracy: "±5 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±10 % Average"
+            
+        pm5_0:
+          range (0-50 µg/m³):
+            accuracy: "±10 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±20 % Average"
+            
+        pm10_0::
+          range (0-50 µg/m³):
+            accuracy: "±10 µg/m³"
+            
+          range (>50 µg/m³):
+            accuracy: "±20 % Average"      
+      resolution: "0.1 µg/m³"
+  sampling_rate: "1 Hz" #5 hz in Debug mode

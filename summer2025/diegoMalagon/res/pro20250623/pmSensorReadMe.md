@@ -7,6 +7,6 @@ this circuit design utilizes a raspberry pi microcontroller in order to comminuc
 
 ## ![Wiring Diagram for PM and CO2 sensors][def]
 
-
+![lk](https://github.com/mi3nts/mintsInsight/blob/db7fd45ae9a9d5d615db22db8ce456531f08c2f1/summer2025/diegoMalagon/res/pro20250623/INA219connectionDiagram.drawio.png)
 
 [def]: summer2025/diegoMalagon/res/pro20250623

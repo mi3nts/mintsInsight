@@ -9,4 +9,4 @@ this circuit design utilizes a raspberry pi microcontroller in order to comminuc
 
 
 
-[def]: summer2025/diegoMalagon/res/pro20250623/INA219connectionDiagram.drawio.png
+[def]: summer2025/diegoMalagon/res/pro20250623

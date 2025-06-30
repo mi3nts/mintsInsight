@@ -2,7 +2,7 @@ from smbus2 import SMBus
 import time
 from ina219 import INA219, DeviceRangeError
 from datetime import datetime
-from function import DataUtils  # Make sure class name matches your file
+from function import dataTools  # Make sure class name matches your file
 
 class SMBusINA219:
     def __init__(self, bus=5, address=0x40, csv_file='INA219dataLog.csv'):

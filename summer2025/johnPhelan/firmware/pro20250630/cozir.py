@@ -25,39 +25,38 @@ class Cozir(object):
             com = b'z'
         self.write(com)
         
-        res = self.ser.readline().strip()
-
-        try:
-            assert res.startswith(com + b' ')
-            res = float(res[2:])
-        except AssertionError:
-            print("Sensor sent unexpected CO2 data!")
-        return res
+        for _ in range(5):  # try up to 5 lines to find valid data
+            res = self.ser.readline().strip()
+            if res.startswith(com + b' '):
+                try:
+                    return float(res[2:])
+                except ValueError:
+                    continue
+        raise RuntimeError("CO2 response invalid or missing.")
 
     def readTemperature(self):
-        '''temperature in degrees Celsius
-        
-        (T command)
-        '''
         self.write(b'T')
-        res = self.ser.readline().strip()
-        try:
-            assert res.startswith(b'T ')
-            res = (float(res[2:]) - 1000)/10.
-        except AssertionError:
-            print("Sensor sent unexpected temperature data!")
-        return res
+
+        for _ in range(5):
+            res = self.ser.readline().strip()
+            if res.startswith(b'T '):
+                try:
+                    return (float(res[2:]) - 1000) / 10.
+                except ValueError:
+                    continue
+        print("Sensor sent unexpected temperature data!")
+        return None
+
     
     def readHumidity(self):
-        '''relative humidity in %
-        
-        (H command)
-        '''
-        self.write(b'H')
-        res = self.ser.readline().strip()
-        try:
-            assert res.startswith(b'H ')
-            res = float(res[2:])/10.
-        except:
-            print("Sensor sent unexpected humidity data!")
-        return res
+        self.write(b'T')
+
+        for _ in range(5):
+            res = self.ser.readline().strip()
+            if res.startswith(b'T '):
+                try:
+                    return (float(res[2:]) - 1000) / 10.
+                except ValueError:
+                    continue
+        print("Sensor sent unexpected temperature data!")
+        return None

@@ -6,19 +6,18 @@ class IpsSensor:
     POLY = 0x8408
     I2C_ADDRESS = 0x4B
 
-    def __init__(self, bus_number=5):
+    def __init__(self, bus_number=4):
         self.bus = SMBus(bus_number)
         self.pc_values = [0]*7
         self.pm_values = [0.0]*7
         self.event_status = 0
-        self.debug = False
+        self.debug = True
 
     def begin(self):
         """
         Initialize sensor and start measurements with 200ms sampling
         """
-        if self.debug:
-            print(f"IpsSensor begin on bus {self.bus.fd}")
+
         # send start measurement command
         self.bus.write_i2c_block_data(self.I2C_ADDRESS, 0x10, [0x01])
         time.sleep(5)  # warm-up

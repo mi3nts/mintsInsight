@@ -1,17 +1,13 @@
 import serial
 
 class Cozir(object):
-    verbosity = 1   # level of information printed to terminal
-    def __init__(self, port, verbosity=1):
+    def __init__(self, port):
         self.ser = serial.Serial(port, timeout=1)
-        self.verbosity = verbosity
-        if verbosity >= 1:
-            print('connected to "{}"'.format(port))
+        print('connected to "{}"'.format(port))
         
     def write(self, com):
         '''write the command `com` (bytes) followed by "\\r\\n"'''
-        if verbosity >= 2:
-            print('writing "{}"'.format(com))
+        print('writing "{}"'.format(com))
         self.ser.write(com + b'\r\n')
     
     def readCO2(self, with_filter=True):
@@ -30,9 +26,12 @@ class Cozir(object):
         self.write(com)
         
         res = self.ser.readline().strip()
-        assert res.startswith(com + b' ')
-        res = float(res[2:])
-        
+
+        try:
+            assert res.startswith(com + b' ')
+            res = float(res[2:])
+        except AssertionError:
+            print("Sensor sent unexpected CO2 data!")
         return res
 
     def readTemperature(self):
@@ -42,8 +41,11 @@ class Cozir(object):
         '''
         self.write(b'T')
         res = self.ser.readline().strip()
-        assert res.startswith(b'T ')
-        res = (float(res[2:]) - 1000)/10.
+        try:
+            assert res.startswith(b'T ')
+            res = (float(res[2:]) - 1000)/10.
+        except AssertionError:
+            print("Sensor sent unexpected temperature data!")
         return res
     
     def readHumidity(self):
@@ -53,6 +55,9 @@ class Cozir(object):
         '''
         self.write(b'H')
         res = self.ser.readline().strip()
-        assert res.startswith(b'H ')
-        res = float(res[2:])/10.
+        try:
+            assert res.startswith(b'H ')
+            res = float(res[2:])/10.
+        except:
+            print("Sensor sent unexpected humidity data!")
         return res

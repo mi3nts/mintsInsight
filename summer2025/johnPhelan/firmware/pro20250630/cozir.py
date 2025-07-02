@@ -1,3 +1,9 @@
+'''
+
+code taken and modified from https://github.com/pierre-haessig/pycozir/blob/master/cozir/cozir.py
+
+'''
+
 import serial
 
 class Cozir(object):

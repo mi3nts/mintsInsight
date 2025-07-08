@@ -16,6 +16,9 @@ class Cozir(object):
         print('writing "{}"'.format(com))
         self.ser.write(com + b'\r\n')
     
+    # deque to find interval avg 
+    # check if latest or avg
+    # take both avg and latest
     def readCO2(self, with_filter=True):
         '''CO2 concentration in ppm
         
@@ -30,20 +33,23 @@ class Cozir(object):
         else:
             com = b'z'
         self.write(com)
-        
-        for _ in range(5):  # try up to 5 lines to find valid data
-            res = self.ser.readline().strip()
-            if res.startswith(com + b' '):
-                try:
-                    return float(res[2:])
-                except ValueError:
-                    continue
-        raise RuntimeError("CO2 response invalid or missing.")
+        try:
+            for _ in range(3):  # try up to 3 lines to find valid data; can crash without this
+                res = self.ser.readline().strip()
+                if res.startswith(com + b' '):
+                    try:
+                        return float(res[2:])
+                    except ValueError:
+                        continue
+        except RuntimeError as e:
+            print("Caught error in reading CO2: ", e)
+    
+    
 
     def readTemperature(self):
         self.write(b'T')
 
-        for _ in range(5):
+        for _ in range(3):
             res = self.ser.readline().strip()
             if res.startswith(b'T '):
                 try:
@@ -57,7 +63,7 @@ class Cozir(object):
     def readHumidity(self):
         self.write(b'T')
 
-        for _ in range(5):
+        for _ in range(3):
             res = self.ser.readline().strip()
             if res.startswith(b'T '):
                 try:

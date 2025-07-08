@@ -13,7 +13,7 @@ class Cozir(object):
         
     def write(self, com):
         '''write the command `com` (bytes) followed by "\\r\\n"'''
-        print('writing "{}"'.format(com))
+        # print('writing "{}"'.format(com))
         self.ser.write(com + b'\r\n')
     
     # deque to find interval avg 
@@ -61,14 +61,14 @@ class Cozir(object):
 
     
     def readHumidity(self):
-        self.write(b'T')
+        self.write(b'H')
 
         for _ in range(3):
             res = self.ser.readline().strip()
-            if res.startswith(b'T '):
+            if res.startswith(b'H '):
                 try:
-                    return (float(res[2:]) - 1000) / 10.
+                    return (float(res[2:])) / 10.
                 except ValueError:
                     continue
-        print("Sensor sent unexpected temperature data!")
+        print("Sensor sent unexpected humidity data!")
         return None

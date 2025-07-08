@@ -1,30 +1,15 @@
 BME280 Sensor Driver
 ====================
-.. image:: https://github.com/rm-hull/bme280/workflows/RPi.bme280/badge.svg?branch=master
-   :target: https://github.com/rm-hull/bme280/actions?workflow=RPi.bme280m
-
-.. image:: https://coveralls.io/repos/github/rm-hull/bme280/badge.svg?branch=master
-   :target: https://coveralls.io/github/rm-hull/bme280?branch=master
-
-.. image:: https://img.shields.io/pypi/pyversions/rpi-bme280.svg
-   :target: https://pypi.python.org/pypi/rpi-bme280
-
-.. image:: https://img.shields.io/pypi/v/rpi-bme280.svg
-   :target: https://pypi.python.org/pypi/rpi-bme280
-
-.. image:: https://img.shields.io/maintenance/yes/2021.svg?maxAge=2592000
-
 
 Interfacing a Bosch BME280 digital sensor module (capable of sensing
 temperature, humidity and pressure) in Python 3 using I2C on the Raspberry
-Pi. The particular kit I bought can be acquired for a few pounds from `eBay
-<http://www.ebay.co.uk/itm/311728184519>`_. Further technical details for the
+Pi. Further technical details for the
 BME280 sensor can be found in the `datasheet
-<https://raw.githubusercontent.com/rm-hull/bme280/master/doc/tech-spec/BME280.pdf>`_
+<https://github.com/mi3nts/mintsInsight/blob/main/summer2025/tundeAwoyinka/datasheets/BME280/ds01BME280.pdf>`_
 [PDF].
 
-.. image:: https://raw.githubusercontent.com/rm-hull/bme280/master/doc/bme280-sensor.jpg
-   :alt: mounted
+.. image:: https://github.com/mi3nts/mintsInsight/blob/main/summer2025/tundeAwoyinka/datasheets/BME280/bme280-sensor.jpg
+  
 
 GPIO pin-outs
 -------------
@@ -159,33 +144,10 @@ This then should print something like::
 For a data-logger like application, periodically call ``bme280.sample(bus, address, calibration_params)`` to
 get time-based readings.
 
-See the `weatherstation project <https://github.com/rm-hull/weatherstation>`_ for
-a more complete example usage.
-
 References
 ----------
-> TODO
+https://github.com/rm-hull/bme280/tree/master/bme280
 
-License
--------
-The MIT License (MIT)
 
-Copyright (c) 2016-2021 Richard Hull
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

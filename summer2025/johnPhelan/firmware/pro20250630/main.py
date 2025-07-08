@@ -7,12 +7,14 @@ sensor = Cozir('/dev/serial0')
 dequeCO2 = deque()
 
 while True:
-    currentCO2 = sensor.readCO2()
+    currentUnfilteredCO2 = sensor.readCO2(with_filter=False)
+    currentFilteredCO2 = sensor.readCO2(with_filter=True)
     currentTemp = sensor.readTemperature()
     currentHumidity = sensor.readHumidity()
+    dequeCO2.append(currentUnfilteredCO2)
 
-    dequeCO2.append(currentCO2)
-    print("CO₂:", currentCO2, "ppm")
+    print("CO₂:", currentFilteredCO2, "ppm")
+    print("uCO2: ", currentUnfilteredCO2, "ppm")
     print("CO2 deque: ", dequeCO2)
     print("Temperature:", currentTemp, "°C")
     print("Humidity:", currentHumidity, "%")

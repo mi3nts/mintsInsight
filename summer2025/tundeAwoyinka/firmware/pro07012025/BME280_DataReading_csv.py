@@ -24,7 +24,7 @@ try:
         pres = bme280.pressure
         alt = bme280.altitude
 
-        print(f"🌡 Temp: {temp:.2f} °C | 💧 Humidity: {hum:.2f}% | ⚖ Pressure: {pres:.1f} hPa | 🏔 Altitude: {alt:.2f} m")
+        print(f" Temp: {temp:.2f} °C |  Humidity: {hum:.2f}% |  Pressure: {pres:.1f} hPa |  Altitude: {alt:.2f} m")
 
         # Prepare data dictionary
         data = {
@@ -41,4 +41,4 @@ try:
         time.sleep(10)
 
 except KeyboardInterrupt:
-    print("✅ Data logging stopped by user.")
+    print("Data logging stopped by user.")

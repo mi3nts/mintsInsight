@@ -105,6 +105,8 @@ use 0 for the bus not 1)::
     50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     70: -- -- -- -- -- -- 76 --
+Verify I2C: After rebooting, run i2cdetect -y 0 (for I2C bus 0, or i2cdetect -y 1 for I2C bus 1) 
+to check if the IPS-7100 is detected at its default address (0x4b)
 
 Installing the Python Package
 -----------------------------
@@ -123,3 +125,65 @@ Optional
 ^^^^^^^^^^
 To Grant User Access: Add the Pi user to the I2C access group by running::
   $ sudo adduser pi i2c
+
+
+Programming the Raspberry Pi (Python example)
+---------------------------------------------
+Use the smbus library: It allows communication with I2C devices on the Raspberry Pi.
+Initialize I2C bus and address::
+  import smbus.
+  bus = smbus.SMBus(1) (Replace 1 with the actual I2C bus number you're using, usually 1 for newer Pi models).
+  address = 0x4b (The default address of the IPS-7100)
+
+Interact with the sensor: The IPS-7100 uses specific commands to start/stop measurements, start/stop cleaning 
+cycles, read particle count data (command 0x21), read PM data (command 0x22), and more.
+
+Reading data::
+  data = bus.read_i2c_block_data(address, register_address, num_bytes) (Replace register_address and num_bytes 
+  with the appropriate values for the data you want to read according to `datasheet
+<https://github.com/mi3nts/mintsInsight/blob/main/summer2025/tundeAwoyinka/datasheets/IPS7100/da01IPS7100.pdf>`_
+[PDF])
+
+Software Driver - Example Usage
+-------------------------------
+Once installed, confirm the I2C address and port.
+
+Then in a python script or REPL:
+
+.. code:: python
+
+  # Example: (Based on the example for a different sensor, modify as needed)
+
+import smbus
+import time
+
+bus = smbus.SMBus(1)  # Assuming I2C bus 1
+address = 0x4b  # Default I2C address of IPS-7100
+
+def start_measurement():
+    bus.write_byte_data(address, 0x20, 0x01) # Command to start measurement
+
+def read_particle_count():
+    data = bus.read_i2c_block_data(address, 0x21, 56) # Read 7 particle count values, each 8 bytes
+    # Further processing to extract individual particle counts
+
+def read_pm_data():
+    data = bus.read_i2c_block_data(address, 0x22, 56) # Read 7 PM values, each 8 bytes
+    # Further processing to extract individual PM values
+
+# Example usage
+start_measurement()
+time.sleep(1) # Wait for measurement to start
+
+while True:
+    particle_counts = read_particle_count()
+    pm_data = read_pm_data()
+    print("Particle Counts:", particle_counts)
+    print("PM Data:", pm_data)
+    time.sleep(1)
+
+
+
+Author
+----------
+Tunde Awoyinka

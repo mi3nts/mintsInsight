@@ -154,33 +154,33 @@ Then in a python script or REPL:
 
   # Example: (Based on the example for a different sensor, modify as needed)
 
-import smbus
-import time
+  import smbus
+  import time
 
-bus = smbus.SMBus(1)  # Assuming I2C bus 1
-address = 0x4b  # Default I2C address of IPS-7100
+  bus = smbus.SMBus(1)  # Assuming I2C bus 1
+  address = 0x4b  # Default I2C address of IPS-7100
 
-def start_measurement():
-    bus.write_byte_data(address, 0x20, 0x01) # Command to start measurement
+  def start_measurement():
+      bus.write_byte_data(address, 0x20, 0x01) # Command to start measurement
 
-def read_particle_count():
-    data = bus.read_i2c_block_data(address, 0x21, 56) # Read 7 particle count values, each 8 bytes
-    # Further processing to extract individual particle counts
+  def read_particle_count():
+      data = bus.read_i2c_block_data(address, 0x21, 56) # Read 7 particle count values, each 8 bytes
+      # Further processing to extract individual particle counts
 
-def read_pm_data():
-    data = bus.read_i2c_block_data(address, 0x22, 56) # Read 7 PM values, each 8 bytes
-    # Further processing to extract individual PM values
+  def read_pm_data():
+      data = bus.read_i2c_block_data(address, 0x22, 56) # Read 7 PM values, each 8 bytes
+      # Further processing to extract individual PM values
 
-# Example usage
-start_measurement()
-time.sleep(1) # Wait for measurement to start
+  # Example usage
+  start_measurement()
+  time.sleep(1) # Wait for measurement to start
 
-while True:
-    particle_counts = read_particle_count()
-    pm_data = read_pm_data()
-    print("Particle Counts:", particle_counts)
-    print("PM Data:", pm_data)
-    time.sleep(1)
+  while True:
+      particle_counts = read_particle_count()
+      pm_data = read_pm_data()
+      print("Particle Counts:", particle_counts)
+      print("PM Data:", pm_data)
+      time.sleep(1)
 
 
 

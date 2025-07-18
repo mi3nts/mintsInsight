@@ -38,8 +38,8 @@ For UART, the IPS7100 pins are connected to RPi pins as follows:
 Board Pin  Name   Remarks      RPi Pin  RPi Function  
 ========== ====== ============ ======== ==============
 1          VIN    +5V Power    Pin-2    3V3           
-2          SDA    I/O or Data  Pin-16   GPIO 23 (SDA)           
-3          SCL    Clock        Pin-18   GPIO 24 (SCL)  
+2          RX     I/O or Data  Pin-8    GPIO 14 (TXD)           
+3          TX     Transmit     Pin-10   GPIO 15 (RXD)  
 4          SEL    Select       None     None
 5          GND    Ground       Pin-6    GND
 ========== ====== ============ ======== ==============

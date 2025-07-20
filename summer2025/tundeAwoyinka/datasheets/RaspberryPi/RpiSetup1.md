@@ -3,8 +3,6 @@
 ### Headless Raspberry pi setup
 To set up a Raspberry Pi headlessly (without a monitor, keyboard, or mouse), you'll need to preconfigure the OS image with network settings and enable SSH. Then, you can access it remotely via SSH from another computer on the same network. 
 
-Config.txt options: [link](https://www.raspberrypi.com/documentation/computers/getting-started.html#:~:text=To%20set%20your%20Raspberry%20Pi%20up%20headless%2C,need%20the%20following%20additional%20accessories:%20a%20display.)
-
 ### Here's a step-by-step guide:
 1) Download and Install Raspberry Pi Imager: 
 Download the [Raspberry Pi Imager](https://www.raspberrypi.com/software) for your operating system.
@@ -93,7 +91,7 @@ core_freq=250
 
 These are GPIO 14 (pin 8) (TXD), and 15 (pin 10) (RXD). 3.3v is Pin 1.
 
-### I2C (maybe)
+### I2C (optional)
 
 http://ozzmaker.com/i2c/
 
@@ -149,6 +147,7 @@ sudo systemctl start grafana-server
 ```
 
 ## Links
-
 - [Raspberry pi Pin out](https://pinout.xyz)
+- Config.txt options: [link](https://www.raspberrypi.com/documentation/computers/getting-started.html#:~:text=To%20set%20your%20Raspberry%20Pi%20up%20headless%2C,need%20the%20following%20additional%20accessories:%20a%20display.)
+
 

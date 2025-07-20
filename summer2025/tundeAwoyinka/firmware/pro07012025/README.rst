@@ -22,10 +22,10 @@ For prototyping, the P1 header pins should be connected as follows:
 ========== ====== ============ ======== ==============
 Board Pin  Name   Remarks      RPi Pin  RPi Function  
 ========== ====== ============ ======== ==============
-1          VIN    +3.3V Power  P01-1    3V3           
-2          GND    Ground       P01-6    GND           
-3          SCL    Clock        P01-5    GPIO 3 (SCL)  
-4          SDA    Data         P01-3    GPIO 2 (SDA)  
+1          VIN    +3.3V Power  Pin-1    3V3           
+2          GND    Ground       Pin-14   GND           
+3          SCL    Clock        Pin-29   GPIO 5 (SCL)  
+4          SDA    Data         Pin-31   GPIO 6 (SDA)  
 ========== ====== ============ ======== ==============
    
 Pre-requisites

@@ -2,7 +2,7 @@
 Breath analysis projects focus on using exhaled breath to detect mind reflections and perceptions of man. By analyzing Co2 and other parameters in breath, we aim to identify various  part of a person that thinks, reasons, feels, and remembers under sociological concept.
 
 ## Breath Analyzer Image
-![ModuleSetup](https://github.com/mi3nts/3DMints2025/blob/main/prana/stls/pinWheel-Part.stl)
+![ModuleSetup](https://github.com/mi3nts/mintsInsight/blob/main/summer2025/tundeAwoyinka/datasheets/breath_analysis/Prana.png)
 
 
 ## Breath Analyzer Circuit Diagram

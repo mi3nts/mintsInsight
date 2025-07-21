@@ -8,7 +8,7 @@ Breath analysis projects focus on using exhaled breath to detect mind reflection
 ## Breath Analyzer Circuit Diagram
 ![ModuleSetup](https://github.com/mi3nts/mintsInsight/blob/main/summer2025/tundeAwoyinka/datasheets/breath_analysis/BME%2CIPS7100CO2%20Connection%201.png)
 
-Using a [CozIR-AHE-1 CO2 sensor], [BME 280] and [IPS7100 ] with a [Raspberry Pi] involves connecting the sensors to the Raspberry Pi via its UART serial and I2C interface and then writing code to communicate with it and interpret the data as follows.
+Using a CozIR-AHE-1 CO2 sensor, BME 280 and IPS7100  with a Raspberry Pi involves connecting the sensors to the Raspberry Pi via its UART serial and I2C interface and then writing code to communicate with it and interpret the data as follows.
 
 
 | Pressure Range|      Label        |                                                   Reflection                                                           | 

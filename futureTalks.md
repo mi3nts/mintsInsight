@@ -1,5 +1,5 @@
 # Future Talks
 
 - LoRaWAN
-- MQTT Server Setup
+- MQTT
 - Grafana 

@@ -3,4 +3,5 @@
 - LoRaWAN
 - MQTT
 - Grafana
-- PCB Development 
+- PCB Development
+- WiFi Halow

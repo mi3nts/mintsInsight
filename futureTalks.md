@@ -6,4 +6,4 @@
 - PCB Development
 - WiFi Halow
 - Node Red
-- DBs Influx DB and Data Pipeline Faciltors (Node Red)
+- DBs: PostgresSQL, Influx DB and Data Pipeline Faciltors (Node Red)

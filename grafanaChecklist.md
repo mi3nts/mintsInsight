@@ -6,6 +6,6 @@
 - ✅ The time markers of the timeseries should match with the timeseries above it.
 - ✅ The units should be there inside the panels (i.e. axis in case of timeseries)
 - ✅ When plotting multiple timeseries in a single panel, make sure they have visibly differentiable colors.
-- ✅ For timeseries like temperature, pressure,  humidity etc. use **Gradient Mode**:*Scheme* and **Color Scheme**:*Red-Yellow-Green or others*.
+- ✅ For timeseries like temperature, pressure,  humidity etc. use **Gradient Mode:** *Scheme* and **Color Scheme:** *Red-Yellow-Green or others*.
 
 

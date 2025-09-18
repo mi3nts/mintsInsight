@@ -10,11 +10,14 @@ SPI_DEV = 0
 SPI_SPEED = 500000  # Hz
 
 spi = None
+_initialized = False
 
 def init():
     global spi
+    if _initialized:
+        return
     GPIO.setwarnings(False)
-    GPIO.setmode(GPIO,BCM)
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(CS_PIN, GPIO.OUT)
     GPIO.output(CS_PIN, GPIO.HIGH)
     spi = spidev.SpiDev()

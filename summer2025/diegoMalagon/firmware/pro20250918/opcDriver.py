@@ -80,17 +80,3 @@ def opc_histogram():
         bins.append(msb << 8 | lsb)
     pm1, pm25, pm10 = struct.unpack('<fff', bytes(data[48:60]))
     return {"bins": bins, "PM1": pm1, "PM2.5": pm25, "PM10": pm10}
-
-# === MAIN TEST ===
-if __name__ == "__main__":
-    try:
-        init()
-        opc_on()
-        print("Device Info:", opc_info())
-        pm = opc_pm()
-        print("PM:", pm)
-        hist = opc_histogram()
-        print("Histogram bins:", hist["bins"])
-    finally:
-        opc_off()
-        cleanup()

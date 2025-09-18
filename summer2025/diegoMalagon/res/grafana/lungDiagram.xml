@@ -1,0 +1,87 @@
+<svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* PM Air Quality Index Color Classes */
+    .good { fill: #00e400; stroke: #333; stroke-width: 2; }
+    .moderate { fill: #ffff00; stroke: #333; stroke-width: 2; }
+    .unhealthy-sensitive { fill: #ff7e00; stroke: #333; stroke-width: 2; }
+    .unhealthy { fill: #ff0000; stroke: #333; stroke-width: 2; }
+    .very-unhealthy { fill: #8f3f97; stroke: #333; stroke-width: 2; }
+    .hazardous { fill: #7e0023; stroke: #333; stroke-width: 2; }
+    
+    /* Default state */
+    .organ { fill: #e6f3ff; stroke: #333; stroke-width: 2; transition: fill 0.3s ease; }
+    
+    /* Labels */
+    .label { font-family: Arial, sans-serif; font-size: 14px; fill: #333; text-anchor: middle; }
+    .small-label { font-family: Arial, sans-serif; font-size: 10px; fill: #666; text-anchor: middle; }
+  </style>
+  
+  <!-- Nasal Cavity & Upper Airways (PM10+ gets filtered here) -->
+  <ellipse id="nasal-cavity" class="organ" data-field="pm_coarse" 
+           cx="200" cy="30" rx="25" ry="15"/>
+  <text x="200" y="35" class="small-label">Nasal Cavity</text>
+  
+  <!-- Trachea (PM2.5-10 impact) -->
+  <rect id="trachea" class="organ" data-field="pm10_level" 
+        x="180" y="80" width="40" height="250" rx="20"/>
+  <text x="200" y="105" class="small-label">Trachea</text>
+  
+  <!-- Main Bronchi (PM2.5 impact) -->
+  <path id="left-main-bronchus" class="organ" data-field="pm25_level" 
+        d="M200 140 Q 160 160 130 180 Q 120 185 115 195 L 125 205 Q 130 195 140 190 Q 170 170 200 150 Z" />
+  <path id="right-main-bronchus" class="organ" data-field="pm25_level" 
+        d="M200 140 Q 240 160 270 180 Q 280 185 285 195 L 275 205 Q 270 195 260 190 Q 230 170 200 150 Z" />
+  
+  <!-- Secondary Bronchi -->
+  <circle id="left-bronchi" class="organ" data-field="pm25_level" 
+          cx="120" cy="280" r="15"/>
+  <circle id="right-bronchi" class="organ" data-field="pm25_level" 
+          cx="280" cy="280" r="15"/>
+  
+  <!-- Lung Lobes (PM2.5 and ultrafine particles) -->
+  <!-- Left Lung -->
+  <ellipse id="left-upper-lobe" class="organ" data-field="pm25_level" 
+           cx="150" cy="280" rx="45" ry="150"/>
+  
+  <!-- Right Lung -->
+  <ellipse id="right-upper-lobe" class="organ" data-field="pm25_level" 
+           cx="250" cy="280" rx="45" ry="150"/>
+  
+  <!-- Alveolar Regions (Ultrafine PM0.1 impact) -->
+  <circle id="left-alveoli" class="organ" data-field="pm01_level" 
+          cx="100" cy="350" r="8"/>
+  <circle id="right-alveoli-1" class="organ" data-field="pm01_level" 
+          cx="300" cy="350" r="8"/>
+
+  
+  <!-- Labels -->
+  <text x="200" y="20" class="label">Human Respiratory Tract - PM Impact</text>
+  <text x="80" y="350" class="small-label">Left Lung</text>
+  <text x="320" y="350" class="small-label">Right Lung</text>
+  
+  <!-- Legend -->
+  <g transform="translate(20, 480)">
+    <text x="0" y="15" class="label">PM Size Impact:</text>
+    <rect x="0" y="25" width="15" height="15" class="good"/>
+    <text x="20" y="37" class="small-label">Good (0-50)</text>
+    <rect x="0" y="45" width="15" height="15" class="moderate"/>
+    <text x="20" y="57" class="small-label">Moderate (51-100)</text>
+    <rect x="0" y="65" width="15" height="15" class="unhealthy-sensitive"/>
+    <text x="20" y="77" class="small-label">Unhealthy Sensitive (101-150)</text>
+    <rect x="100" y="25" width="15" height="15" class="unhealthy"/>
+    <text x="120" y="37" class="small-label">Unhealthy (151-200)</text>
+    <rect x="100" y="45" width="15" height="15" class="very-unhealthy"/>
+    <text x="120" y="57" class="small-label">Very Unhealthy (201-300)</text>
+    <rect x="100" y="65" width="15" height="15" class="hazardous"/>
+    <text x="120" y="77" class="small-label">Hazardous (301+)</text>
+  </g>
+  
+  <!-- Data Field Annotations -->
+  <g transform="translate(300, 480)" class="small-label">
+    <text x="0" y="15">Data Fields:</text>
+    <text x="0" y="30">• pm_coarse (PM10+)</text>
+    <text x="0" y="45">• pm10_level (PM2.5-10)</text>
+    <text x="0" y="60">• pm25_level (PM2.5)</text>
+    <text x="0" y="75">• pm01_level (PM0.1)</text>
+  </g>
+</svg>

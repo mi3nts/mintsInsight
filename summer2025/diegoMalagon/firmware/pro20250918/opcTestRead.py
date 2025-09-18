@@ -1,18 +1,20 @@
 import opcDriver as opc
-import time
+from time import sleep
 
 def main():
+    opc.init()
     opc.opc_on()
     try:
         print("Device Info:", opc.opc_info())
         for i in range(5):
             pm = opc.opc_pm()
-            print(f"Reading {i+1}: PM1={pm['PM1']:.2f}, PM2.5={pm['PM2.5']:.2f}, PM10={pm['PM10']:.2f}")
+            print(f"Reading {i+1}: {pm}")
             hist = opc.opc_histogram()
-            print("Histogram bins:", hist["bins"])
-            time.sleep(2)
+            print(f"Histogram Bins: {hist['bins']}")
+            sleep(2)
     finally:
         opc.opc_off()
+        opc.cleanup()
         print("Device turned off.")
 
 if __name__ == "__main__":

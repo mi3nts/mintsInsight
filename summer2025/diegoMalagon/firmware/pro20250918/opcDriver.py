@@ -9,16 +9,19 @@ SPI_BUS = 0
 SPI_DEV = 0
 SPI_SPEED = 500000  # Hz
 
-# === SETUP ===
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(CS_PIN, GPIO.OUT)
-GPIO.output(CS_PIN, GPIO.HIGH)
+spi = None
 
-spi = spidev.SpiDev()
-spi.open(SPI_BUS, SPI_DEV)
-spi.no_cs = True
-spi.max_speed_hz = SPI_SPEED
-spi.mode = 1  # SPI mode 1 (CPOL=0, CPHA=1)
+def init():
+    global spi
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO,BCM)
+    GPIO.setup(CS_PIN, GPIO.OUT)
+    GPIO.output(CS_PIN, GPIO.HIGH)
+    spi = spidev.SpiDev()
+    spi.open(SPI_BUS, SPI_DEV)
+    spi.no_cs = True
+    spi.max_speed_hz = SPI_SPEED
+    spi.mode = 1  # SPI mode 1
 
 # === HELPERS ===
 def spi_transfer(cmd, rx_bytes=0):
@@ -29,6 +32,10 @@ def spi_transfer(cmd, rx_bytes=0):
     rx = spi.xfer2(tx)
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
+
+def cleanup():
+    spi.close()
+    GPIO.cleanup()
 
 # === OPC COMMANDS ===
 CMD_ON = 0x12

@@ -3,6 +3,7 @@ from time import sleep
 import struct
 
 def main():
+    opc.init()
     opc.opc_on()
     try:
         print("Device Info:", opc.opc_info())
@@ -15,3 +16,4 @@ def main():
     finally:
         opc.opc_off()
         print("Device turned off.")
+        opc.cleanup()

@@ -7,7 +7,7 @@ import struct
 CS_PIN = 8  # GPIO8 = CE0
 SPI_BUS = 0
 SPI_DEV = 0
-SPI_SPEED = 500000  # Hz
+SPI_SPEED = 2000000  # Hz
 
 # === GLOBALS ===
 spi = None
@@ -67,7 +67,7 @@ def opc_info():
 
 def opc_pm():
     resp = spi_transfer(CMD_PM, 12)
-    pm1, pm25, pm10 = struct.unpack('<fff', bytes(resp[1:13]))
+    pm1, pm25, pm10 = struct.unpack('<H', bytes(resp[1:13]))
     return {"PM1": pm1, "PM2.5": pm25, "PM10": pm10}
 
 def opc_histogram():
@@ -78,5 +78,5 @@ def opc_histogram():
         lsb = data[2*i]
         msb = data[2*i+1]
         bins.append(msb << 8 | lsb)
-    pm1, pm25, pm10 = struct.unpack('<fff', bytes(data[48:60]))
+    pm1, pm25, pm10 = struct.unpack('<f', bytes(data[48:60]))
     return {"bins": bins, "PM1": pm1, "PM2.5": pm25, "PM10": pm10}

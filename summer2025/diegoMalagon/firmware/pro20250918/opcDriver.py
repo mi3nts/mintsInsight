@@ -7,7 +7,6 @@ import RPi.GPIO as GPIO
 from time import sleep
 import struct
 
-
 # === CONFIG ===
 CS_PIN = 8  # GPIO8 = CE0
 SPI_BUS = 0
@@ -53,7 +52,7 @@ def spiTransfer(cmd, rx_bytes=0):
     spi.xfer2([cmd])             # send command
     sleep(0.01)                  # wait for OPC to prepare data
 
-    rx = spi.xfer2([0x00] * (1 + rx_bytes))  # read ACK + payload
+    rx = spi.xfer2([0x00] * (1 + rx_bytes))  # read ACK/echo + payload
 
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
@@ -64,9 +63,33 @@ def spiMulti(tx_bytes, rx_bytes=0):
         raise RuntimeError("opcDriver not initialized. Call init() first.")
     GPIO.output(CS_PIN, GPIO.LOW)
     sleep(0.001)
-    rx = spi.xfer2(tx_bytes + [0x00] * rx_bytes)
+    spi.xfer2(tx_bytes)  # send bytes
+    sleep(0.01)
+    rx = spi.xfer2([0x00] * (1 + rx_bytes)) if rx_bytes > 0 else []
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
+
+def _validate_frame(resp, cmd, expected_len):
+    """
+    Normalize response frames:
+      - ACK-first: [0xF3, payload...]
+      - ACK-last: [payload..., 0xF3]
+      - Echo: [cmd, payload...]
+    Returns (payload, mode) or (None, reason).
+    """
+    if not resp:
+        return None, "empty"
+    if resp[0] == 0xF3:
+        return resp[1:], "ack_start"
+    if resp[-1] == 0xF3:
+        return resp[:-1], "ack_end"
+    if resp[0] == cmd:
+        return resp[1:], "echo"
+    return None, "no_ack"
+
+def decodeASCII(payload):
+    """Decode payload into clean ASCII string"""
+    return ''.join(chr(b) for b in payload if 32 <= b < 127).strip()
 
 # === OPC COMMANDS ===
 cmdPower = 0x03
@@ -78,95 +101,82 @@ cmdHist = 0x30
 cmdPm =  0x32
 
 def opcOn():
-    # Fan + Laser ON
-    spiMulti([cmdPower, 0x00])   # send 0x03
+    spiMulti([cmdPower, 0x00])   # Fan + Laser ON
+    sleep(1.0)  # let fan/laser stabilize
 
 def opcOff():
-    # Fan + Laser OFF
-    spiMulti([cmdPower, 0x01])
+    spiMulti([cmdPower, 0x01])   # Fan + Laser OFF
 
 def opcPm():
-    resp = spiTransfer(cmdPm, 13)  # ACK + 12 bytes
-    print("raw pm response:", resp)
-    _validate_frame(resp, cmdPm, 13)
-    if resp[0] != 0xF3:
-        print("No ACK from OPC pm data command")
-    if len(resp) <13:
-        print("Incomplete PM data received")
+    resp = spiTransfer(cmdPm, 12)
+    payload, mode = _validate_frame(resp, cmdPm, 12)
+    print("raw pm response:", resp, "mode:", mode)
+    if payload is None or len(payload) < 12:
+        print("No valid PM data")
         return None
-    pm1, pm25, pm10 = struct.unpack('<fff', bytes(resp[1:13]))
-    return {"PM1": pm1, "PM2.5": pm25, "PM10": pm10}
+    try:
+        pm1, pm25, pm10 = struct.unpack('<fff', bytes(payload[:12]))
+        return {"PM1": pm1, "PM2.5": pm25, "PM10": pm10}
+    except struct.error:
+        print("PM unpack failed")
+        return None
 
 def opcHistogram():
-    resp = spiTransfer(cmdHist, 86)  # ACK + 85 data bytes
-    _validate_frame(resp, cmdHist, 86)
-    print("raw histogram response:", resp)
-    if resp[0] != 0xF3:
-        print("No ACK from OPC histogram command")
+    resp = spiTransfer(cmdHist, 85)
+    payload, mode = _validate_frame(resp, cmdHist, 85)
+    print("raw histogram response:", resp, "mode:", mode)
+    if payload is None:
+        print("No valid histogram data")
+        return None
 
-    data = resp[1:]
+    nBins = 14 if len(payload) < 64 else 16
     bins = []
-    nBins = 14 if len(data) < 64 else 16
     for i in range(nBins):
-        start = i*4
+        start = i * 4
         end   = start + 4
-        bins.append(struct.unpack('<I', bytes(data[start:end]))[0])
+        if end <= len(payload):
+            bins.append(struct.unpack('<I', bytes(payload[start:end]))[0])
+        else:
+            bins.append(0)
 
-    sfr   = struct.unpack('<f', bytes(data[64:68]))[0]
-    temp  = struct.unpack('<f', bytes(data[68:72]))[0]
-    press = struct.unpack('<f', bytes(data[72:76]))[0]
-    period= struct.unpack('<f', bytes(data[76:80]))[0]
+    sfr   = struct.unpack('<f', bytes(payload[64:68]))[0] if len(payload) >= 68 else 0.0
+    temp  = struct.unpack('<f', bytes(payload[68:72]))[0] if len(payload) >= 72 else 0.0
+    press = struct.unpack('<f', bytes(payload[72:76]))[0] if len(payload) >= 76 else 0.0
+    period= struct.unpack('<f', bytes(payload[76:80]))[0] if len(payload) >= 80 else 0.0
 
     return {"bins": bins, "SFR": sfr, "Temp": temp, "Press": press, "Period": period}
+
 def opcInfo():
-    """Read information string (60 ASCII chars)"""
     resp = spiTransfer(cmdInfo, 60)
-    _validate_frame(resp, cmdInfo, 60)
-    print("raw info response:", resp)
-    if resp[0] != 0xF3:
-        print("No ACK from OPC info command")
-    return ''.join(chr(b) if 32 <= b < 127 else '.' for b in resp[1:])
+    payload, mode = _validate_frame(resp, cmdInfo, 60)
+    print("raw info response:", resp, "mode:", mode)
+    if payload is None:
+        return None
+    return decodeASCII(payload)
 
 def opcSerial():
-    """Read serial number string (60 ASCII chars)"""
     resp = spiTransfer(cmdSerial, 60)
-    _validate_frame(resp, cmdSerial, 60)
-    print("raw serial response:", resp)
-    if resp[0] != 0xF3:
-        print("No ACK from OPC serial command")
-    return ''.join(chr(b) if 32 <= b < 127 else '.' for b in resp[1:])
+    payload, mode = _validate_frame(resp, cmdSerial, 60)
+    print("raw serial response:", resp, "mode:", mode)
+    if payload is None:
+        return None
+    return decodeASCII(payload)
 
 def opcFwver():
-    """Read firmware version (2 bytes: major, minor)"""
     resp = spiTransfer(cmdFwver, 2)
-    _validate_frame(resp, cmdFwver, 2)
-    print("raw fwver response:", resp)
-    if resp[0] != 0xF3:
-        print("No ACK from OPC firmware version command")
-    major, minor = resp[1], resp[2]
+    payload, mode = _validate_frame(resp, cmdFwver, 2)
+    print("raw fwver response:", resp, "mode:", mode)
+    if payload is None or len(payload) < 2:
+        return None
+    major, minor = payload[0], payload[1]
     return f"{major}.{minor}"
+
 def opcStatus():
     resp = spiTransfer(cmdStatus, 4)
-    _validate_frame(resp, cmdStatus, 4)
-    if resp[0] != 0xF3:
-        print("No ACK from OPC status command")
-    fan_on, laser_on, fan_dac, laser_dac = resp[1:5]
+    payload, mode = _validate_frame(resp, cmdStatus, 4)
+    print("raw status response:", resp, "mode:", mode)
+    if payload is None or len(payload) < 4:
+        return None
+    fan_on, laser_on, fan_dac, laser_dac = payload[:4]
     return {"Fan": bool(fan_on), "Laser": bool(laser_on),
             "FanDAC": fan_dac, "LaserDAC": laser_dac}
-def _validate_frame(resp, cmd, expected_len):
-    if not resp:
-        return None, "empty"
-    if resp[0] == 0xF3:
-        # ACK at start
-        return resp[1:], "ack_start"
-    if resp[-1] == 0xF3:
-        # ACK at end
-        return resp[:-1], "ack_end"
-    if resp[0] == cmd:
-        # command echo instead of ACK
-        return resp[1:], "echo"
-    return None, "no_ack"
-
-
-
-

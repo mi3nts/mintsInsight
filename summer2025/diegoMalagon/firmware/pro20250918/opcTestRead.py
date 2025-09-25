@@ -4,21 +4,17 @@ from time import sleep
 def main():
     opc.init()
     opc.opcOn()
-    sleep(2)  # wait for device to stabilize
-    
-    print("Device Info:", opc.opcInfo())
-    serial = opc.opcSerial()
-    if serial:
-        print("Serial:", serial)
-    else:
-        print("Firmware:", opc.opcFwver())
-        print("Status:", opc.opcStatus())
-    
-    for i in range(5):
-        print("PM Data:", opc.opcPm())
-        print("Histogram:", opc.opcHistogram())
-        sleep(2)
-    
+    sleep(2)  # warm up
+
+    print("Info:", opc.opcInfo())
+    print("Serial:", opc.opcSerial())
+    print("FW:", opc.opcFwver())
+
+    print("Status:", opc.opcStatus())
+
+    print("PM:", opc.opcPm())   # with debug print
+
+        
     opc.opcOff()
     opc.cleanup()
     print("Device turned off.")

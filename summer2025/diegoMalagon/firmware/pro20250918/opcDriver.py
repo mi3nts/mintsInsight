@@ -47,8 +47,9 @@ def spiTransfer(cmd, rx_bytes=0):
     if not _initialized:
         raise RuntimeError("opcDriver not initialized. Call init() first.")
     GPIO.output(CS_PIN, GPIO.LOW)
-    sleep(0.01)
+    sleep(0.001)
     tx = [cmd] + [0x00] * rx_bytes
+    sleep(0.01)
     rx = spi.xfer2(tx)
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
@@ -82,6 +83,7 @@ def opcOff():
 
 def opcPm():
     resp = spiTransfer(cmdPm, 13)  # ACK + 12 bytes
+    print("raw pm response:", resp)
     if resp[0] != 0xF3:
         raise RuntimeError("No ACK from OPC")
     pm1, pm25, pm10 = struct.unpack('<fff', bytes(resp[1:13]))

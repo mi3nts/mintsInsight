@@ -95,7 +95,7 @@ def spiMulti(tx_bytes, rx_bytes=0):
     if not _initialized:
         raise RuntimeError("opcDriver not initialized. Call init() first.")
     GPIO.output(CS_PIN, GPIO.LOW)
-    sleep(0.001)
+    sleep(0.01)
     spi.xfer2(tx_bytes)  # send bytes
     sleep(0.01)
     rx = spi.xfer2([0x00] * (1 + rx_bytes)) if rx_bytes > 0 else []

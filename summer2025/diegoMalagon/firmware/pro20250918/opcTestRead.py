@@ -11,6 +11,7 @@ def dump_bytes(label, resp):
 def main():
     opc.init()
     opc.opcOn()
+    print("Serial: ", opc.opcSerial())
     print("Warming up OPC... (10s)")
     sleep(10)
 

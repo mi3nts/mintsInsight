@@ -88,6 +88,7 @@ def opcOff():
 def opcPm():
     resp = spiTransfer(cmdPm, 13)  # ACK + 12 bytes
     print("raw pm response:", resp)
+    _validate_frame(resp, cmdPm, 13)
     if resp[0] != 0xF3:
         print("No ACK from OPC pm data command")
     if len(resp) <13:
@@ -98,6 +99,7 @@ def opcPm():
 
 def opcHistogram():
     resp = spiTransfer(cmdHist, 86)  # ACK + 85 data bytes
+    _validate_frame(resp, cmdHist, 86)
     print("raw histogram response:", resp)
     if resp[0] != 0xF3:
         print("No ACK from OPC histogram command")
@@ -119,6 +121,7 @@ def opcHistogram():
 def opcInfo():
     """Read information string (60 ASCII chars)"""
     resp = spiTransfer(cmdInfo, 60)
+    _validate_frame(resp, cmdInfo, 60)
     print("raw info response:", resp)
     if resp[0] != 0xF3:
         print("No ACK from OPC info command")
@@ -127,6 +130,7 @@ def opcInfo():
 def opcSerial():
     """Read serial number string (60 ASCII chars)"""
     resp = spiTransfer(cmdSerial, 60)
+    _validate_frame(resp, cmdSerial, 60)
     print("raw serial response:", resp)
     if resp[0] != 0xF3:
         print("No ACK from OPC serial command")
@@ -135,6 +139,7 @@ def opcSerial():
 def opcFwver():
     """Read firmware version (2 bytes: major, minor)"""
     resp = spiTransfer(cmdFwver, 2)
+    _validate_frame(resp, cmdFwver, 2)
     print("raw fwver response:", resp)
     if resp[0] != 0xF3:
         print("No ACK from OPC firmware version command")
@@ -142,11 +147,26 @@ def opcFwver():
     return f"{major}.{minor}"
 def opcStatus():
     resp = spiTransfer(cmdStatus, 4)
+    _validate_frame(resp, cmdStatus, 4)
     if resp[0] != 0xF3:
         print("No ACK from OPC status command")
     fan_on, laser_on, fan_dac, laser_dac = resp[1:5]
     return {"Fan": bool(fan_on), "Laser": bool(laser_on),
             "FanDAC": fan_dac, "LaserDAC": laser_dac}
+def _validate_frame(resp, cmd, expected_len):
+    if not resp:
+        return None, "empty"
+    if resp[0] == 0xF3:
+        # ACK at start
+        return resp[1:], "ack_start"
+    if resp[-1] == 0xF3:
+        # ACK at end
+        return resp[:-1], "ack_end"
+    if resp[0] == cmd:
+        # command echo instead of ACK
+        return resp[1:], "echo"
+    return None, "no_ack"
+
 
 
 

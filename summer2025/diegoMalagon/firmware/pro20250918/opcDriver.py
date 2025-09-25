@@ -85,14 +85,15 @@ def opcPm():
     resp = spiTransfer(cmdPm, 13)  # ACK + 12 bytes
     print("raw pm response:", resp)
     if resp[0] != 0xF3:
-        raise RuntimeError("No ACK from OPC pm data command")
+        print("No ACK from OPC pm data command")
     pm1, pm25, pm10 = struct.unpack('<fff', bytes(resp[1:13]))
     return {"PM1": pm1, "PM2.5": pm25, "PM10": pm10}
 
 def opcHistogram():
     resp = spiTransfer(cmdHist, 86)  # ACK + 85 data bytes
+    print("raw histogram response:", resp)
     if resp[0] != 0xF3:
-        raise RuntimeError("No ACK from OPC histogram command")
+        print("No ACK from OPC histogram command")
 
     data = resp[1:]
     bins = []
@@ -111,22 +112,25 @@ def opcHistogram():
 def opcInfo():
     """Read information string (60 ASCII chars)"""
     resp = spiTransfer(cmdInfo, 60)
+    print("raw info response:", resp)
     if resp[0] != 0xF3:
-        raise RuntimeError("No ACK from OPC info command")
+        print("No ACK from OPC info command")
     return ''.join(chr(b) if 32 <= b < 127 else '.' for b in resp[1:])
 
 def opcSerial():
     """Read serial number string (60 ASCII chars)"""
     resp = spiTransfer(cmdSerial, 60)
+    print("raw serial response:", resp)
     if resp[0] != 0xF3:
-        raise RuntimeError("No ACK from OPC serial command")
+        print("No ACK from OPC serial command")
     return ''.join(chr(b) if 32 <= b < 127 else '.' for b in resp[1:])
 
 def opcFwver():
     """Read firmware version (2 bytes: major, minor)"""
     resp = spiTransfer(cmdFwver, 2)
+    print("raw fwver response:", resp)
     if resp[0] != 0xF3:
-        raise RuntimeError("No ACK from OPC firmware version command")
+        print("No ACK from OPC firmware version command")
     major, minor = resp[1], resp[2]
     return f"{major}.{minor}"
 def opcStatus():

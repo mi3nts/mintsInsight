@@ -50,7 +50,7 @@ def spiTransfer(cmd, rx_bytes=0):
     sleep(0.001)
     tx = [cmd] + [0x00] * rx_bytes
     sleep(0.01)
-    rx = spi.xfer2(0x00 * (1 + rx_bytes))
+    rx = spi.xfer2(tx)
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
 

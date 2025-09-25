@@ -9,8 +9,6 @@ def main():
     print("Info:", opc.opcInfo())
     print("Serial:", opc.opcSerial())
 
-    print("Status:", opc.opcStatus())
-
     print("PM:", opc.opcPm())   # with debug print
 
         

@@ -74,11 +74,11 @@ cmdPm =  0x32
 
 def opcOn():
     # Fan + Laser ON
-    spiMulti(cmdPower, 0x00)   # send 0x03
+    spiMulti([cmdPower, 0x00])   # send 0x03
 
 def opcOff():
     # Fan + Laser OFF
-    spiMulti(cmdPower, 0x01)
+    spiMulti([cmdPower, 0x01])
 
 def opcPm():
     resp = spiTransfer(cmdPm, 13)  # ACK + 12 bytes

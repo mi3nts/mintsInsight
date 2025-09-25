@@ -50,7 +50,7 @@ def spiTransfer(cmd, rx_bytes=0):
     sleep(0.001)
     tx = [cmd] + [0x00] * rx_bytes
     sleep(0.01)
-    rx = spi.xfer2(tx)
+    rx = spi.xfer2(0x00 * (1 + rx_bytes))
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
 
@@ -96,7 +96,8 @@ def opcHistogram():
 
     data = resp[1:]
     bins = []
-    for i in range(16):
+    nBins = 14 if len(data) < 64 else 16
+    for i in range(nBins):
         start = i*4
         end   = start + 4
         bins.append(struct.unpack('<I', bytes(data[start:end]))[0])

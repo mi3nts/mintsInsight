@@ -1,35 +1,32 @@
-# opcTestRead.py
+import csv, time
 import opcDriver as opc
-from time import sleep
 
 def main():
     opc.init()
     opc.opcOn()
+    time.sleep(2)
 
-    try:
-        serial = opc.opcSerial()
-        print("Serial:", serial)
+    with open("opc_log.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["timestamp", "cmd", "mode", "raw_bytes"])
 
-        print("Press Ctrl+C to stop...")
-        while True:
-            pm = opc.opcPm()
-            print("PM:", pm)
+        try:
+            while True:
+                ts = time.time()
+                pm = opc.opcPm()
+                hist = opc.opcHistogram()
 
-            hist = opc.opcHistogram()
-            if hist:
-                print("Histogram Bins:", hist["bins"])
-            else:
-                print("Histogram: None")
+                writer.writerow([ts, "PM", "raw", pm])
+                writer.writerow([ts, "HIST", "raw", hist])
+                f.flush()
 
-            sleep(2)
+                time.sleep(1)
 
-    except KeyboardInterrupt:
-        print("\nStopping...")
-
-    finally:
-        opc.opcOff()
-        opc.cleanup()
-        print("Device turned off and GPIO cleaned up.")
+        except KeyboardInterrupt:
+            print("Stopping...")
+        finally:
+            opc.opcOff()
+            opc.cleanup()
 
 if __name__ == "__main__":
     main()

@@ -57,6 +57,15 @@ def spiTransfer(cmd, rx_bytes=0):
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
 
+def opcRaw(cmd, rx_bytes):
+    """Send a command and return raw payload with mode."""
+    resp = spiTransfer(cmd, rx_bytes)
+    payload, mode = _validate_frame(resp, cmd, rx_bytes)
+    if payload is None:
+        # fallback: just use full response
+        payload = resp
+    return payload, mode
+
 def spiMulti(tx_bytes, rx_bytes=0):
     """Multi-byte command (ex. power control) + optional readback"""
     if not _initialized:
@@ -108,43 +117,14 @@ def opcOff():
     spiMulti([cmdPower, 0x01])   # Fan + Laser OFF
 
 def opcPm():
-    resp = spiTransfer(cmdPm, 12)
-    payload, mode = _validate_frame(resp, cmdPm, 12)
-    print("raw pm response:", resp, "mode:", mode)
-    if payload is None or len(payload) < 12:
-        print("No valid PM data")
-        return None
-    try:
-        pm1, pm25, pm10 = struct.unpack('<fff', bytes(payload[:12]))
-        return {"PM1": pm1, "PM2.5": pm25, "PM10": pm10}
-    except struct.error:
-        print("PM unpack failed")
-        return None
+    payload, mode = opcRaw(cmdPm, 13)
+    print("raw PM:", payload, "mode:", mode)
+    return payload  # leaving parsing for later
 
 def opcHistogram():
-    resp = spiTransfer(cmdHist, 85)
-    payload, mode = _validate_frame(resp, cmdHist, 85)
-    print("raw histogram response:", resp, "mode:", mode)
-    if payload is None:
-        print("No valid histogram data")
-        return None
-
-    nBins = 14 if len(payload) < 64 else 16
-    bins = []
-    for i in range(nBins):
-        start = i * 4
-        end   = start + 4
-        if end <= len(payload):
-            bins.append(struct.unpack('<I', bytes(payload[start:end]))[0])
-        else:
-            bins.append(0)
-
-    sfr   = struct.unpack('<f', bytes(payload[64:68]))[0] if len(payload) >= 68 else 0.0
-    temp  = struct.unpack('<f', bytes(payload[68:72]))[0] if len(payload) >= 72 else 0.0
-    press = struct.unpack('<f', bytes(payload[72:76]))[0] if len(payload) >= 76 else 0.0
-    period= struct.unpack('<f', bytes(payload[76:80]))[0] if len(payload) >= 80 else 0.0
-
-    return {"bins": bins, "SFR": sfr, "Temp": temp, "Press": press, "Period": period}
+    payload, mode = opcRaw(cmdHist, 86)
+    print("raw histogram:", payload, "mode:", mode)
+    return payload
 
 def opcInfo():
     resp = spiTransfer(cmdInfo, 60)
@@ -155,11 +135,8 @@ def opcInfo():
     return decodeASCII(payload)
 
 def opcSerial():
-    resp = spiTransfer(cmdSerial, 60)
-    payload, mode = _validate_frame(resp, cmdSerial, 60)
-    print("raw serial response:", resp, "mode:", mode)
-    if payload is None:
-        return None
+    payload, mode = opcRaw(cmdSerial, 60)
+    print("raw serial:", payload, "mode:", mode)
     return decodeASCII(payload)
 
 def opcFwver():

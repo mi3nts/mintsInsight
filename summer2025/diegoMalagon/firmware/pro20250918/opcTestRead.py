@@ -3,6 +3,8 @@ from time import sleep
 
 def main():
     opc.init()
+    opc.opcOff()
+    sleep(1)
     opc.opcOn()
     sleep(2)  # warm up
 

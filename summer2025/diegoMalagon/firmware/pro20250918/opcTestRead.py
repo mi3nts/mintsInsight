@@ -8,11 +8,9 @@ def main():
     opc.opcOn()
     sleep(2)  # warm up
 
-    print("Info:", opc.opcInfo())
+
     print("Serial:", opc.opcSerial())
 
-    print("FW Version:", opc.opcFwver())
-    print("Status:", opc.opcStatus())
     print("Histogram:", opc.opcHistogram())
 
     print("PM:", opc.opcPm())   # with debug print

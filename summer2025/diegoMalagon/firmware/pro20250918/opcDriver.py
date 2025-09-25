@@ -43,14 +43,18 @@ def cleanup():
 
 # === HELPERS ===
 def spiTransfer(cmd, rx_bytes=0):
-    """Single-byte command + readback"""
+    """Send a single-byte command and read back response"""
     if not _initialized:
         raise RuntimeError("opcDriver not initialized. Call init() first.")
+
     GPIO.output(CS_PIN, GPIO.LOW)
     sleep(0.001)
-    tx = [cmd] + [0x00] * rx_bytes
-    sleep(0.01)
-    rx = spi.xfer2(tx)
+
+    spi.xfer2([cmd])             # send command
+    sleep(0.01)                  # wait for OPC to prepare data
+
+    rx = spi.xfer2([0x00] * (1 + rx_bytes))  # read ACK + payload
+
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
 
@@ -86,6 +90,9 @@ def opcPm():
     print("raw pm response:", resp)
     if resp[0] != 0xF3:
         print("No ACK from OPC pm data command")
+    if len(resp) <13:
+        print("Incomplete PM data received")
+        return None
     pm1, pm25, pm10 = struct.unpack('<fff', bytes(resp[1:13]))
     return {"PM1": pm1, "PM2.5": pm25, "PM10": pm10}
 

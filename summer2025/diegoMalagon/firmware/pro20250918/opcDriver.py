@@ -136,7 +136,7 @@ def opcFwver():
 def opcStatus():
     resp = spiTransfer(cmdStatus, 4)
     if resp[0] != 0xF3:
-        raise RuntimeError("No ACK from OPC status command")
+        print("No ACK from OPC status command")
     fan_on, laser_on, fan_dac, laser_dac = resp[1:5]
     return {"Fan": bool(fan_on), "Laser": bool(laser_on),
             "FanDAC": fan_dac, "LaserDAC": laser_dac}

@@ -1,5 +1,6 @@
 # opcTestRead.py
 import opcDriver as opc
+import opcLogger as logger
 from time import sleep
 
 def dump_bytes(label, resp):
@@ -26,6 +27,9 @@ def main():
             dump_bytes("Hist raw", hist_resp)
 
             print("-" * 60)
+            # Log data using the logger module
+            logger.log_data("opc_test_log.csv")
+
             sleep(2)
 
     except KeyboardInterrupt:

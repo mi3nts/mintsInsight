@@ -6,7 +6,7 @@ def main():
     opc.opcOn()
     time.sleep(2)
 
-    with open("opc_log.csv", "w", newline="") as f:
+    with open("opcLog.csv", "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["timestamp", "cmd", "mode", "raw_bytes"])
 

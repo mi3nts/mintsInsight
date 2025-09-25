@@ -8,7 +8,6 @@ def main():
 
     print("Info:", opc.opcInfo())
     print("Serial:", opc.opcSerial())
-    print("FW:", opc.opcFwver())
 
     print("Status:", opc.opcStatus())
 

@@ -1,25 +1,35 @@
+# opcTestRead.py
 import opcDriver as opc
 from time import sleep
 
 def main():
     opc.init()
-    opc.opcOff()
-    sleep(1)
     opc.opcOn()
-    sleep(2)  # warm up
 
+    try:
+        serial = opc.opcSerial()
+        print("Serial:", serial)
 
-    print("Serial:", opc.opcSerial())
+        print("Press Ctrl+C to stop...")
+        while True:
+            pm = opc.opcPm()
+            print("PM:", pm)
 
-    print("Histogram:", opc.opcHistogram())
+            hist = opc.opcHistogram()
+            if hist:
+                print("Histogram Bins:", hist["bins"])
+            else:
+                print("Histogram: None")
 
-    print("PM:", opc.opcPm())   # with debug print
+            sleep(2)
 
-        
-    opc.opcOff()
-    opc.cleanup()
-    print("Device turned off.")
+    except KeyboardInterrupt:
+        print("\nStopping...")
+
+    finally:
+        opc.opcOff()
+        opc.cleanup()
+        print("Device turned off and GPIO cleaned up.")
 
 if __name__ == "__main__":
     main()
-# summer2025/diegoMalagon/firmware/pro20250918/opcDriver.py

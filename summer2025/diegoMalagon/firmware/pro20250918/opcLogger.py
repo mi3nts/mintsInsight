@@ -1,7 +1,7 @@
 import csv, time
 import opcDriver as opc
 
-def log_data(filename="opc_log.csv"):
+def log_data(filename="opcLog.csv"):
     opc.init()
     opc.opcOn()
     time.sleep(10)  # warm-up

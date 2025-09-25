@@ -17,6 +17,25 @@ SPI_SPEED = 500000  # Hz
 spi = None
 _initialized = False
 
+# === OPC COMMANDS ===
+cmdPower = 0x03
+cmdInfo = 0x3F
+cmdSerial = 0x10
+cmdFwver = 0x12
+cmdStatus = 0x13
+cmdHist = 0x30
+cmdPm =  0x32
+
+# Command delays (seconds)
+_CMD_DELAYS = {
+    cmdInfo:   0.05,
+    cmdSerial: 0.05,
+    cmdFwver:  0.05,
+    cmdStatus: 0.05,
+    cmdPm:     0.2,
+    cmdHist:   0.5,
+}
+
 # === INIT ===
 def init():
     global spi, _initialized
@@ -41,21 +60,26 @@ def cleanup():
     _initialized = False
 
 # === HELPERS ===
-def spiTransfer(cmd, rx_bytes=0):
-    """Send a single-byte command and read back response"""
+def spiTransfer(cmd, rx_bytes=0, delay=None):
+    """Send a single-byte command, wait, then read back"""
     if not _initialized:
         raise RuntimeError("opcDriver not initialized. Call init() first.")
 
+    # Pick delay from table if not given
+    if delay is None:
+        delay = _CMD_DELAYS.get(cmd, 0.05)
+
     GPIO.output(CS_PIN, GPIO.LOW)
-    sleep(0.001)
+    sleep(0.01)
 
-    spi.xfer2([cmd])             # send command
-    sleep(0.01)                  # wait for OPC to prepare data
+    spi.xfer2([cmd])       # send command
+    sleep(delay)           # wait for device to prepare response
 
-    rx = spi.xfer2([0x00] * (1 + rx_bytes))  # read ACK/echo + payload
+    rx = spi.xfer2([0x00] * (1 + rx_bytes))
 
     GPIO.output(CS_PIN, GPIO.HIGH)
     return rx
+
 
 def opcRaw(cmd, rx_bytes):
     """Send a command and return raw payload with mode."""
@@ -100,14 +124,6 @@ def decodeASCII(payload):
     """Decode payload into clean ASCII string"""
     return ''.join(chr(b) for b in payload if 32 <= b < 127).strip()
 
-# === OPC COMMANDS ===
-cmdPower = 0x03
-cmdInfo = 0x3F
-cmdSerial = 0x10
-cmdFwver = 0x12
-cmdStatus = 0x13
-cmdHist = 0x30
-cmdPm =  0x32
 
 def opcOn():
     spiMulti([cmdPower, 0x00])   # Fan + Laser ON

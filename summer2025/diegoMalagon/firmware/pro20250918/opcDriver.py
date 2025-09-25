@@ -47,7 +47,7 @@ def spiTransfer(cmd, rx_bytes=0):
     if not _initialized:
         raise RuntimeError("opcDriver not initialized. Call init() first.")
     GPIO.output(CS_PIN, GPIO.LOW)
-    sleep(0.001)
+    sleep(0.01)
     tx = [cmd] + [0x00] * rx_bytes
     rx = spi.xfer2(tx)
     GPIO.output(CS_PIN, GPIO.HIGH)

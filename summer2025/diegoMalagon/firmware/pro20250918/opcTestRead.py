@@ -4,6 +4,7 @@ from time import sleep
 def main():
     opc.init()
     opc.opcOn()
+    sleep(2)  # wait for device to stabilize
     try:
         print("Device Info:", opc.opcInfo())
         print("Serial No:", opc.opcSerial())

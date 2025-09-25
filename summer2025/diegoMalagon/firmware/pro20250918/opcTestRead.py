@@ -5,22 +5,23 @@ def main():
     opc.init()
     opc.opcOn()
     sleep(2)  # wait for device to stabilize
-    try:
-        print("Device Info:", opc.opcInfo())
-        print("Serial No:", opc.opcSerial())
+    
+    print("Device Info:", opc.opcInfo())
+    serial = opc.opcSerial()
+    if serial:
+        print("Serial:", serial)
+    else:
         print("Firmware:", opc.opcFwver())
         print("Status:", opc.opcStatus())
-        
-        for i in range(5):
-            pm = opc.opcPm()
-            print(f"Reading {i+1}: {pm}")
-            hist = opc.opcHistogram()
-            print(f"Histogram Bins: {hist['bins']}")
-            sleep(2)
-    finally:
-        opc.opcOff()
-        opc.cleanup()
-        print("Device turned off.")
+    
+    for i in range(5):
+        print("PM Data:", opc.opcPm())
+        print("Histogram:", opc.opcHistogram())
+        sleep(2)
+    
+    opc.opcOff()
+    opc.cleanup()
+    print("Device turned off.")
 
 if __name__ == "__main__":
     main()

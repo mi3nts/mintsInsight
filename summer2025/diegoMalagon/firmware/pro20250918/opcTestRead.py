@@ -1,32 +1,39 @@
-import csv, time
+# opcTestRead.py
 import opcDriver as opc
+from time import sleep
+
+def dump_bytes(label, resp):
+    """Pretty print raw bytes as both decimal and hex"""
+    print(f"{label} (len={len(resp)}):")
+    print("dec:", resp)
+    print("hex:", [hex(b) for b in resp])
 
 def main():
     opc.init()
     opc.opcOn()
-    time.sleep(2)
+    print("Warming up OPC... (10s)")
+    sleep(10)
 
-    with open("opcLog.csv", "w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(["timestamp", "cmd", "mode", "raw_bytes"])
+    try:
+        while True:
+            # --- PM Frame ---
+            pm_resp = opc.spiTransfer(opc.cmdPm, 32)  # over-read
+            dump_bytes("PM raw", pm_resp)
 
-        try:
-            while True:
-                ts = time.time()
-                pm = opc.opcPm()
-                hist = opc.opcHistogram()
+            # --- Histogram Frame ---
+            hist_resp = opc.spiTransfer(opc.cmdHist, 128)  # over-read
+            dump_bytes("Hist raw", hist_resp)
 
-                writer.writerow([ts, "PM", "raw", pm])
-                writer.writerow([ts, "HIST", "raw", hist])
-                f.flush()
+            print("-" * 60)
+            sleep(2)
 
-                time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nStopping test...")
 
-        except KeyboardInterrupt:
-            print("Stopping...")
-        finally:
-            opc.opcOff()
-            opc.cleanup()
+    finally:
+        opc.opcOff()
+        opc.cleanup()
+        print("Device turned off.")
 
 if __name__ == "__main__":
     main()

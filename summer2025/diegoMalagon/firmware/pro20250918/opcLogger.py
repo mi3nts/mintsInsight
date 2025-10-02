@@ -1,6 +1,8 @@
 import csv, time
 import opcDriver as opc
 
+#logs data from OPC - N2 to CSV file
+
 def log_data(filename="opcLog.csv"):
     opc.init()
     opc.opcOn()

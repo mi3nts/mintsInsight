@@ -1,0 +1,5 @@
+"Id";"Designator";"Footprint";"Quantity";"Designation";"Supplier and ref";
+1;"R1";"R_0201_0603Metric_Pad0.64x0.40mm_HandSolder";1;"200";;;
+2;"BT1";"BatteryHolder_Keystone_1058_1x2032";1;"Battery_Cell";;;
+3;"D1";"LED_5mm_Radial";1;"LED";;;
+4;"SW1";"SW_TH_Tactile_Omron_B3F-100x";1;"SW_DPST_x2";;;

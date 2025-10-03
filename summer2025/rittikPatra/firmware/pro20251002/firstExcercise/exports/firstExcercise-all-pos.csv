@@ -1,0 +1,5 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"BT1","Battery_Cell","BatteryHolder_Keystone_1058_1x2032",135.320000,-73.000000,0.000000,top
+"D1","LED","LED_5mm_Radial",134.000000,-97.270000,-90.000000,top
+"R1","200","R_0201_0603Metric_Pad0.64x0.40mm_HandSolder",128.432500,-94.000000,0.000000,top
+"SW1","SW_DPST_x2","SW_TH_Tactile_Omron_B3F-100x",127.500000,-91.000000,180.000000,top

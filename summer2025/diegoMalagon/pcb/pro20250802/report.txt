@@ -1,0 +1,51 @@
+Info: Processing symbol 'BT1:Battery:BatteryHolder_Keystone_1058_1x2032'.
+Info: Processing symbol 'SW1:Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx'.
+Info: Processing symbol 'R1:Resistor_SMD:R_0201_0603Metric_Pad0.64x0.40mm_HandSolder'.
+Info: Processing symbol 'D1:digikey-footprints:LED_5mm_Radial'.
+Updated BT1 symbol association from  to /b2f1fdfc-5623-4811-acc0-2966e1791892.
+Updated BT1 fields.
+Updated BT1 sheetname to 'Root'.
+Updated BT1 sheetfile to 'pro20250802.kicad_sch'.
+Add net Net-(BT1--).
+Connected BT1 pin 2 to Net-(BT1--).
+Add net Net-(BT1-+).
+Connected BT1 pin 1 to Net-(BT1-+).
+Changed BT1 value from BatteryHolder_Keystone_1058_1x2032 to Battery_Cell.
+Added D1 (footprint 'digikey-footprints:LED_5mm_Radial').
+Changed REF** reference designator to D1.
+Changed D1 value from LED_5mm_Radial to LED.
+Updated D1 symbol association from  to /c747adef-f9d5-4854-9019-e629362d3603.
+Updated D1 fields.
+Updated D1 sheetname to 'Root'.
+Updated D1 sheetfile to 'pro20250802.kicad_sch'.
+Updated D1 footprint filters to 'LED* LED_SMD:* LED_THT:*'.
+Add net Net-(D1-A).
+Connected D1 pin 2 to Net-(D1-A).
+Add net Net-(D1-K).
+Connected D1 pin 1 to Net-(D1-K).
+Changed REF** reference designator to BT1.
+Added R1 (footprint 'Resistor_SMD:R_0201_0603Metric_Pad0.64x0.40mm_HandSolder').
+Changed REF** reference designator to R1.
+Changed R1 value from R_0201_0603Metric_Pad0.64x0.40mm_HandSolder to 200.
+Updated R1 symbol association from  to /9d5c2cb4-2880-4de8-b4f1-57b94d79ecc1.
+Updated R1 fields.
+Updated R1 sheetname to 'Root'.
+Updated R1 sheetfile to 'pro20250802.kicad_sch'.
+Updated R1 footprint filters to 'R_*'.
+Connected R1 pin 1 to Net-(D1-A).
+Connected R1 pin 2 to Net-(BT1--).
+Added BT1 (footprint 'Battery:BatteryHolder_Keystone_1058_1x2032').
+Added SW1 (footprint 'Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx').
+Changed REF** reference designator to SW1.
+Changed SW1 value from SW_TH_Tactile_Omron_B3F-10xx to SW_DPST_x2.
+Updated SW1 symbol association from  to /781a3768-983f-4a42-9f1f-69049b674397.
+Updated SW1 fields.
+Updated SW1 sheetname to 'Root'.
+Updated SW1 sheetfile to 'pro20250802.kicad_sch'.
+Connected SW1 pin 1 to Net-(BT1-+).
+Connected SW1 pin 2 to Net-(D1-K).
+Connected SW1 pin 2 to Net-(D1-K).
+Connected SW1 pin 1 to Net-(BT1-+).
+
+
+Info: Total warnings: 0, errors: 0.

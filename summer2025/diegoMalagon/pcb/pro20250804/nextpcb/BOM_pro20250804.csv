@@ -1,0 +1,4 @@
+﻿reference,value,footprint,MPN,manufacturer,Category,SKU,price,quantity
+D1,Red,LED_0402_1005Metric_Red,SML-310LTT86,Rohm,LEDs,2500402653,0.13195,1
+R1,220,R_0603_1608Metric,3-6318490-6,TE Connectivity (Tyco Electronics),Board to Board Connectors,2500419484,3.74111,1
+S1,JS202011SCQN,Switch_Slide_JS202011SCQN,JS202011SCQN,C&K SYSTEMS,Universal,-,-,1
